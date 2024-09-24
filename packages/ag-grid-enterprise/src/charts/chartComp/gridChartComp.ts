@@ -1,3 +1,5 @@
+import type { AgChartInstance, AgChartThemeOverrides, AgChartThemePalette } from 'ag-charts-community';
+
 import type {
     BeanCollection,
     ChartModel,
@@ -22,8 +24,8 @@ import {
     _setDisplayed,
     _warnOnce,
 } from 'ag-grid-community';
-import type { AgChartInstance, AgChartThemeOverrides, AgChartThemePalette } from 'ag-charts-community';
 
+import { AgDialog } from '../../widgets/agDialog';
 import type { CrossFilteringContext } from '../chartService';
 import { ChartController, DEFAULT_THEMES } from './chartController';
 import { AreaChartProxy } from './chartProxies/cartesian/areaChartProxy';
@@ -51,7 +53,6 @@ import { CHART_TOOL_PANEL_MENU_OPTIONS } from './services/chartMenuService';
 import { ChartOptionsService } from './services/chartOptionsService';
 import type { ChartTranslationKey, ChartTranslationService } from './services/chartTranslationService';
 import { getCanonicalChartType, getSeriesType, isHierarchical } from './utils/seriesTypeMapper';
-import { AgDialog } from '../../widgets/agDialog';
 
 export interface GridChartParams {
     chartId: string;
@@ -86,7 +87,7 @@ export class GridChartComp extends Component {
         this.chartTranslationService = beans.chartTranslationService as ChartTranslationService;
         this.chartMenuService = beans.chartMenuService as ChartMenuService;
         this.focusService = beans.focusService;
-        this.popupService = beans.popupService;
+        this.popupService = beans.popupService!;
     }
 
     private readonly eChart: HTMLElement = RefPlaceholder;

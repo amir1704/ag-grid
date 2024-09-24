@@ -12,17 +12,11 @@ import type {
     SortController,
     SortIndicatorComp,
 } from 'ag-grid-community';
-import {
-    Component,
-    DragSourceType,
-    KeyCode,
-    RefPlaceholder,
-    _loadTemplate,
-} from 'ag-grid-community';
+import { Component, DragSourceType, KeyCode, RefPlaceholder, _loadTemplate } from 'ag-grid-community';
 
-import type { TDropZone } from './baseDropZonePanel';
 import { PillDragComp } from '../../widgets/pillDragComp';
 import { VirtualList } from '../../widgets/virtualList';
+import type { TDropZone } from './baseDropZonePanel';
 
 export class DropZoneColumnComp extends PillDragComp<AgColumn> {
     private popupService: PopupService;
@@ -34,7 +28,7 @@ export class DropZoneColumnComp extends PillDragComp<AgColumn> {
 
     public override wireBeans(beans: BeanCollection) {
         super.wireBeans(beans);
-        this.popupService = beans.popupService;
+        this.popupService = beans.popupService!;
         this.sortController = beans.sortController;
         this.columnModel = beans.columnModel;
         this.columnNameService = beans.columnNameService;

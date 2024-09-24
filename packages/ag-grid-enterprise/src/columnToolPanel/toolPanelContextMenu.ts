@@ -10,6 +10,7 @@ import type {
     PopupService,
 } from 'ag-grid-community';
 import { Component, _createIconNoSpan, isColumn, isProvidedColumnGroup } from 'ag-grid-community';
+
 import { AgMenuList } from '../widgets/agMenuList';
 
 type MenuItemName = 'rowGroup' | 'value' | 'pivot';
@@ -36,7 +37,7 @@ export class ToolPanelContextMenu extends Component {
         this.columnModel = beans.columnModel;
         this.columnNameService = beans.columnNameService;
         this.funcColsService = beans.funcColsService;
-        this.popupService = beans.popupService;
+        this.popupService = beans.popupService!;
         this.focusService = beans.focusService;
     }
 

@@ -26,6 +26,7 @@ import { SortModule } from './sort/sortModule';
 import { ValidationService } from './validation/validationService';
 import { ExpressionModule, ValueCacheModule } from './valueService/valueModule';
 import { VERSION } from './version';
+import { PopupModule } from './widgets/popupModule';
 
 export const GridCoreModule = {
     version: VERSION,
@@ -69,6 +70,7 @@ export const CommunityFeaturesModule = _defineModule({
         ColumnHeaderModule,
         ColumnGroupHeaderModule,
         OverlayModule,
-        CellRendererFunctionModule
+        CellRendererFunctionModule,
+        PopupModule,
     ],
 });
