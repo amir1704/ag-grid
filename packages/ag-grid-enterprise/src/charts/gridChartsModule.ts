@@ -6,6 +6,7 @@ import { defineEnterpriseModule } from '../moduleUtils';
 import { RangeSelectionModule } from '../rangeSelection/rangeSelectionModule';
 import { VERSION as GRID_VERSION } from '../version';
 import { AgMenuItemRenderer } from '../widgets/agMenuItemRenderer';
+import { EnterpriseChartProxyFactory } from './chartComp/chartProxies/enterpriseChartProxyFactory';
 import { AdvancedSettingsMenuFactory } from './chartComp/menu/advancedSettings/advancedSettingsMenuFactory';
 import { ChartMenuListFactory } from './chartComp/menu/chartMenuList';
 import { ChartCrossFilterService } from './chartComp/services/chartCrossFilterService';
@@ -34,14 +35,7 @@ export const GridChartsCoreModule = defineEnterpriseModule('GridChartsCoreModule
             chartsVersion: ChartService.CHARTS_VERSION,
         });
     },
-    beans: [
-        ChartService,
-        ChartTranslationService,
-        ChartCrossFilterService,
-        ChartMenuListFactory,
-        ChartMenuService,
-        AdvancedSettingsMenuFactory,
-    ],
+    beans: [ChartService, ChartTranslationService, ChartCrossFilterService, ChartMenuListFactory, ChartMenuService],
     userComponents: [
         {
             name: 'agMenuItem',
@@ -49,6 +43,10 @@ export const GridChartsCoreModule = defineEnterpriseModule('GridChartsCoreModule
         },
     ],
     dependsOn: [RangeSelectionModule, EnterpriseCoreModule, DragAndDropModule, PopupModule],
+});
+
+export const GridChartsEnterpriseFeaturesModule = defineEnterpriseModule('GridChartsEnterpriseFeaturesModule', {
+    beans: [EnterpriseChartProxyFactory, AdvancedSettingsMenuFactory],
 });
 
 export const GridChartsApiModule = defineEnterpriseModule<_GridChartsGridApi>('GridChartsApiModule', {
@@ -69,5 +67,5 @@ export const GridChartsApiModule = defineEnterpriseModule<_GridChartsGridApi>('G
 });
 
 export const GridChartsModule = defineEnterpriseModule(ModuleNames.GridChartsModule, {
-    dependsOn: [GridChartsCoreModule, GridChartsApiModule],
+    dependsOn: [GridChartsCoreModule, GridChartsApiModule, GridChartsEnterpriseFeaturesModule],
 });
