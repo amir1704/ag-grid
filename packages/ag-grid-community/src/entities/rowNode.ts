@@ -83,12 +83,12 @@ export class RowNode<TData = any> implements IEventEmitter<RowNodeEventType>, IR
     /** How many levels this node is from the top when grouping. */
     public level: number;
 
-    /** How many levels this node is from the top when grouping in the UI (only different to `parent` when `groupRemoveSingleChildren=true`)*/
+    /** How many levels this node is from the top when grouping in the UI (only different to `parent` when `groupHideParentOfSingleChild=true`)*/
     public uiLevel: number;
 
     /**
      * If doing in-memory (client-side) grouping, this is the index of the group column this cell is for.
-     * This will always be the same as the level, unless we are collapsing groups, i.e. `groupRemoveSingleChildren=true`.
+     * This will always be the same as the level, unless we are collapsing groups, i.e. `groupHideParentOfSingleChild=true`.
      */
     public rowGroupIndex: number | null;
 
@@ -633,9 +633,12 @@ export class RowNode<TData = any> implements IEventEmitter<RowNodeEventType>, IR
 
         const { rowNodeEventThrottle } = this.beans;
 
-        rowNodeEventThrottle
-            ? rowNodeEventThrottle.dispatchExpanded(event, forceSync)
-            : this.beans.eventService.dispatchEvent(event);
+        // throttle used for CSRM only
+        if (rowNodeEventThrottle) {
+            rowNodeEventThrottle.dispatchExpanded(event, forceSync);
+        } else {
+            this.beans.eventService.dispatchEvent(event);
+        }
 
         // when using footers we need to refresh the group row, as the aggregation
         // values jump between group and footer, because the footer can be callback
