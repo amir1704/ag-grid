@@ -16,9 +16,9 @@ import type {
     HeaderColumnId,
     ProvidedColumnGroup,
 } from '../interfaces/iColumn';
+import type { IFrameworkEventListenerService } from '../interfaces/iFrameworkEventListenerService';
 import type { IRowNode } from '../interfaces/iRowNode';
 import { LocalEventService } from '../localEventService';
-import { FrameworkEventListenerService } from '../misc/frameworkEventListenerService';
 import { _attrToNumber, _exists, _missing } from '../utils/generic';
 import { _mergeDeep } from '../utils/object';
 import type { AgColumnGroup } from './agColumnGroup';
@@ -63,7 +63,7 @@ export class AgColumn<TValue = any> extends BeanStub<ColumnEventName> implements
         this.columnHoverService = beans.columnHoverService;
     }
 
-    private frameworkEventListenerService: FrameworkEventListenerService<any, any> | null;
+    private frameworkEventListenerService?: IFrameworkEventListenerService<any, any>;
 
     private readonly colId: any;
     private colDef: ColDef<any, TValue>;
@@ -323,11 +323,10 @@ export class AgColumn<TValue = any> extends BeanStub<ColumnEventName> implements
         eventType: T,
         userListener: (params: ColumnEvent<T>) => void
     ): void {
-        if (this.frameworkOverrides.shouldWrapOutgoing && !this.frameworkEventListenerService) {
-            // Only construct if we need it, as it's an overhead for column construction
-            this.columnEventService.setFrameworkOverrides(this.frameworkOverrides);
-            this.frameworkEventListenerService = new FrameworkEventListenerService(this.frameworkOverrides);
-        }
+        this.frameworkEventListenerService = this.frameworkOverrides.createLocalEventListenerWrapper?.(
+            this.frameworkEventListenerService,
+            this.columnEventService
+        );
         const listener = this.frameworkEventListenerService?.wrap(userListener) ?? userListener;
 
         this.columnEventService.addEventListener(eventType, listener);

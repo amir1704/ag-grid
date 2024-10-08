@@ -862,6 +862,7 @@ export {
     FrameworkComponentWrapper,
 } from './components/framework/frameworkComponentWrapper';
 export { IFrameworkOverrides, FrameworkOverridesIncomingSource } from './interfaces/iFrameworkOverrides';
+export { IFrameworkEventListenerService } from './interfaces/iFrameworkEventListenerService';
 export type { Environment } from './environment';
 export { ITooltipComp, ITooltipParams, TooltipLocation } from './rendering/tooltipComponent';
 export { TooltipFeature } from './widgets/tooltipFeature';
