@@ -11,6 +11,7 @@ import type { DefaultProvidedCellEditorParams, ICellEditorParams } from '../inte
 import type { CellPosition } from '../interfaces/iCellPosition';
 import type { NavigationService } from '../navigation/navigationService';
 import type { CellCtrl, ICellComp } from '../rendering/cell/cellCtrl';
+import type { RowCtrl } from '../rendering/row/rowCtrl';
 import type { RowRenderer } from '../rendering/rowRenderer';
 import { _getTabIndex } from '../utils/browser';
 import type { ValueService } from '../valueService/valueService';
@@ -177,6 +178,24 @@ export class EditService extends BeanStub implements NamedBean {
         };
 
         viewports.forEach((viewport) => this.addManagedElementListeners(viewport, { focusout: focusOutListener }));
+    }
+
+    public setInlineEditingCss(rowCtrl: RowCtrl): void {
+        const isCellEditing = () => {
+            let isCellEditing = false;
+            rowCtrl.forEveryCellCtrl((cellCtrl) => {
+                if (cellCtrl.isEditing()) {
+                    isCellEditing = true;
+                    return true;
+                }
+            });
+            return isCellEditing;
+        };
+        const editing = rowCtrl.isEditing() || isCellEditing();
+        rowCtrl.forEachGui(undefined, (gui) => {
+            gui.rowComp.addOrRemoveCssClass('ag-row-inline-editing', editing);
+            gui.rowComp.addOrRemoveCssClass('ag-row-not-inline-editing', !editing);
+        });
     }
 
     private takeValueFromCellEditor(cancel: boolean, cellComp: ICellComp): { newValue?: any; newValueExists: boolean } {

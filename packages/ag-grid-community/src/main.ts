@@ -531,6 +531,7 @@ export {
     GetDetailRowDataParams,
     IDetailCellRenderer,
     IDetailCellRendererCtrl,
+    IMasterDetailService,
 } from './interfaces/masterDetail';
 
 // exporter

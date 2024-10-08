@@ -66,6 +66,7 @@ import type { ISelectionService } from '../interfaces/iSelectionService';
 import type { IServerSideTransactionManager } from '../interfaces/iServerSideRowModel';
 import type { IShowRowGroupColsService } from '../interfaces/iShowRowGroupColsService';
 import type { ISideBarService } from '../interfaces/iSideBar';
+import type { IMasterDetailService } from '../interfaces/masterDetail';
 import type { IRenderStatusService } from '../interfaces/renderStatusService';
 import type { LocaleService } from '../localeService';
 import type { AnimationFrameService } from '../misc/animationFrameService';
@@ -290,6 +291,7 @@ export interface CoreBeanCollection {
     groupHideOpenParentsService?: IGroupHideOpenParentsService;
     filterValueService?: FilterValueService;
     flashCellService?: FlashCellService;
+    masterDetailService?: IMasterDetailService;
 }
 
 export type BeanCollection = CoreBeanCollection & {
@@ -416,6 +418,7 @@ export type BeanName =
     | 'licenseManager'
     | 'localeService'
     | 'loggerFactory'
+    | 'masterDetailService'
     | 'menuItemMapper'
     | 'menuService'
     | 'menuUtils'

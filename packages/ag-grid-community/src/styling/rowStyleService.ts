@@ -1,7 +1,7 @@
 import type { NamedBean } from '../context/bean';
 import { BeanStub } from '../context/beanStub';
 import type { BeanCollection } from '../context/context';
-import type { RowClassParams } from '../entities/gridOptions';
+import type { RowClassParams, RowStyle } from '../entities/gridOptions';
 import type { RowNode } from '../entities/rowNode';
 import type { WithoutGridCommon } from '../interfaces/iCommon';
 import { _warnOnce } from '../utils/function';
@@ -99,5 +99,27 @@ export class RowStyleService extends BeanStub implements NamedBean {
             onApplicableClass,
             onNotApplicableClass
         );
+    }
+
+    public processStylesFromGridOptions(rowNode: RowNode): RowStyle | undefined {
+        // part 1 - rowStyle
+        const rowStyle = this.gos.get('rowStyle');
+
+        // part 1 - rowStyleFunc
+        const rowStyleFunc = this.gos.getCallback('getRowStyle');
+        let rowStyleFuncResult: any;
+
+        if (rowStyleFunc) {
+            const params: WithoutGridCommon<RowClassParams> = {
+                data: rowNode.data,
+                node: rowNode,
+                rowIndex: rowNode.rowIndex!,
+            };
+            rowStyleFuncResult = rowStyleFunc(params);
+        }
+        if (rowStyleFuncResult || rowStyle) {
+            return Object.assign({}, rowStyle, rowStyleFuncResult);
+        }
+        return undefined;
     }
 }

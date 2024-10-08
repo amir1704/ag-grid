@@ -926,6 +926,10 @@ export class CellCtrl extends BeanStub {
         };
     }
 
+    public setInlineEditingCss(): void {
+        this.beans.editService?.setInlineEditingCss(this.rowCtrl);
+    }
+
     // CSS Classes that only get applied once, they never change
     private applyStaticCssClasses(): void {
         this.cellComp.addOrRemoveCssClass(CSS_CELL, true);
