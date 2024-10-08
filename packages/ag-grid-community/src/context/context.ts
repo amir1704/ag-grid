@@ -110,10 +110,11 @@ export interface ContextParams extends GenericContextParams<BeanName, BeanCollec
 export interface SingletonBean extends GenericSingletonBean<BeanName, BeanCollection> {}
 
 export type DynamicBeanName =
-    | 'headerFilterCell'
     | 'detailCellRenderer'
-    | 'groupCellRendererCtrl'
     | 'fillHandle'
+    | 'groupCellRendererCtrl'
+    | 'headerFilterCellCtrl'
+    | 'headerGroupCellCtrl'
     | 'rangeHandle';
 
 export type UserComponentName =

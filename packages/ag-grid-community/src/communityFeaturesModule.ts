@@ -7,6 +7,7 @@ import { ColumnHoverModule } from './columns/columnHover/columnHoverModule';
 import {
     ColumnApiModule,
     ColumnFlexModule,
+    ColumnGroupModule,
     ControlsColumnModule,
     DataTypeModule,
     GetColumnDefsApiModule,
@@ -15,7 +16,7 @@ import { CellRendererFunctionModule } from './components/framework/cellRendererF
 import { DragAndDropModule, RowDragModule } from './dragAndDrop/dragModule';
 import { EditModule } from './edit/editModule';
 import { FilterModule } from './filter/filterModule';
-import { ColumnGroupHeaderModule, ColumnHeaderModule } from './headerRendering/cells/headerModule';
+import { ColumnGroupHeaderCompModule, ColumnHeaderCompModule } from './headerRendering/cells/headerModule';
 import type { _ModuleWithoutApi } from './interfaces/iModule';
 import { baseCommunityModule } from './interfaces/iModule';
 import { AnimationFrameModule } from './misc/animationFrameModule';
@@ -70,8 +71,9 @@ export const CommunityFeaturesModule: _ModuleWithoutApi = {
         AnimateShowChangeCellRendererModule,
         AnimateSlideCellRendererModule,
         CheckboxCellRendererModule,
-        ColumnHeaderModule,
-        ColumnGroupHeaderModule,
+        ColumnHeaderCompModule,
+        ColumnGroupHeaderCompModule,
+        ColumnGroupModule,
         OverlayModule,
         CellRendererFunctionModule,
         PopupModule,
