@@ -26,6 +26,7 @@ import { StateModule } from './misc/state/stateModule';
 import { KeyboardNavigationModule } from './navigation/navigationModule';
 import { PaginationModule } from './pagination/paginationModule';
 import { PinnedRowModule } from './pinnedRowModel/pinnedRowModule';
+import { FlashCellModule } from './rendering/cell/flashCellModule';
 import {
     AnimateShowChangeCellRendererModule,
     AnimateSlideCellRendererModule,
@@ -89,5 +90,6 @@ export const CommunityFeaturesModule: _ModuleWithoutApi = {
         KeyboardNavigationModule,
         CellApiModule,
         CommunityMenuApiModule,
+        FlashCellModule,
     ],
 };

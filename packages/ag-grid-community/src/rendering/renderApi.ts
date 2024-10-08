@@ -25,9 +25,13 @@ export function refreshCells<TData = any>(beans: BeanCollection, params: Refresh
 }
 
 export function flashCells<TData = any>(beans: BeanCollection, params: FlashCellsParams<TData> = {}): void {
+    const { flashCellService } = beans;
+    if (!flashCellService) {
+        return;
+    }
     beans.frameworkOverrides.wrapIncoming(() => {
         beans.rowRenderer.forMatchingCellCtrls(params.rowNodes, params.columns as AgColumn[], (cellCtrl) =>
-            cellCtrl.flashCell(params)
+            flashCellService.flashCell(cellCtrl, params)
         );
     });
 }

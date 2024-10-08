@@ -1013,6 +1013,7 @@ export { InfiniteRowModelModule } from './infiniteRowModel/infiniteRowModelModul
 export { PopupModule } from './widgets/popupModule';
 export { SharedMenuModule } from './misc/menu/sharedMenuModule';
 export { KeyboardNavigationCoreModule } from './navigation/navigationModule';
+export { FlashCellModule } from './rendering/cell/flashCellModule';
 
 //  events
 export * from './events';

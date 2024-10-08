@@ -106,6 +106,7 @@ type CommunityModuleName =
     | 'FilterCoreModule'
     | 'FilterModule'
     | 'FilterValueModule'
+    | 'FlashCellModule'
     | 'FloatingFilterCoreModule'
     | 'FloatingFilterModule'
     | 'FullRowEditModule'
