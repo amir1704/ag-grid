@@ -12,7 +12,6 @@ import type { AgGridCommon } from '../interfaces/iCommon';
 import type { DragItem } from '../interfaces/iDragItem';
 import { _removeFromArray } from '../utils/array';
 import { _getElementRectWithOffset } from '../utils/dom';
-import { _isFunction } from '../utils/function';
 import type { AgPromise } from '../utils/promise';
 import { _logWarn } from '../validation/logging';
 import type { DragAndDropImageComponent } from './dragAndDropImageComponent';
@@ -624,7 +623,7 @@ export class DragAndDropService extends BeanStub implements NamedBean {
 
         let { dragItemName } = dragSource;
 
-        if (_isFunction<string>(dragItemName)) {
+        if (typeof dragItemName === 'function') {
             dragItemName = dragItemName();
         }
 

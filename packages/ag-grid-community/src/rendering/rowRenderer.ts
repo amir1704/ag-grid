@@ -30,7 +30,6 @@ import type { PageBoundsService } from '../pagination/pageBoundsService';
 import type { PaginationService } from '../pagination/paginationService';
 import type { PinnedRowModel } from '../pinnedRowModel/pinnedRowModel';
 import { _removeFromArray } from '../utils/array';
-import { _executeInAWhile } from '../utils/function';
 import { _exists } from '../utils/generic';
 import { _createArrayOfNumbers } from '../utils/number';
 import { _getAllValuesInObject, _iterateObject } from '../utils/object';
@@ -1177,7 +1176,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
                 this.updateAllRowCtrls();
                 this.dispatchDisplayedRowsChanged();
             });
-            _executeInAWhile(executeInAWhileFuncs);
+            window.setTimeout(() => executeInAWhileFuncs.forEach((func) => func()), 400);
         }
     }
 
