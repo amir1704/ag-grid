@@ -11,7 +11,6 @@ import { _getDocument, _getRootNode } from '../gridOptionsUtils';
 import type { AgGridCommon } from '../interfaces/iCommon';
 import type { DragItem } from '../interfaces/iDragItem';
 import { _removeFromArray } from '../utils/array';
-import { _getBodyHeight, _getBodyWidth } from '../utils/browser';
 import { _getElementRectWithOffset } from '../utils/dom';
 import { _isFunction } from '../utils/function';
 import type { AgPromise } from '../utils/promise';
@@ -26,6 +25,14 @@ export enum DragSourceType {
     RowDrag,
     ChartPanel,
     AdvancedFilterBuilder,
+}
+
+function _getBodyWidth(): number {
+    return document.body?.clientWidth ?? (window.innerHeight || document.documentElement?.clientWidth || -1);
+}
+
+function _getBodyHeight(): number {
+    return document.body?.clientHeight ?? (window.innerHeight || document.documentElement?.clientHeight || -1);
 }
 
 export interface DragSource {

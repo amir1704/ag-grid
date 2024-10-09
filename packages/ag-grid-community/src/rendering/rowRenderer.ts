@@ -30,7 +30,6 @@ import type { PageBoundsService } from '../pagination/pageBoundsService';
 import type { PaginationService } from '../pagination/paginationService';
 import type { PinnedRowModel } from '../pinnedRowModel/pinnedRowModel';
 import { _removeFromArray } from '../utils/array';
-import { _browserSupportsPreventScroll } from '../utils/browser';
 import { _executeInAWhile } from '../utils/function';
 import { _exists } from '../utils/generic';
 import { _createArrayOfNumbers } from '../utils/number';
@@ -766,7 +765,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
 
         let cellFocused: CellPosition | null = null;
 
-        if (this.stickyRowFeature && _browserSupportsPreventScroll()) {
+        if (this.stickyRowFeature) {
             cellFocused = this.getCellToRestoreFocusToAfterRefresh() || null;
         }
 
@@ -906,7 +905,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
 
         // only try to refocus cells shifting in and out of sticky container
         // if the browser supports focus ({ preventScroll })
-        if (this.stickyRowFeature && _browserSupportsPreventScroll()) {
+        if (this.stickyRowFeature) {
             cellFocused = this.getCellToRestoreFocusToAfterRefresh() || undefined;
         }
 
