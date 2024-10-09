@@ -6,6 +6,7 @@ import type {
     CellNavigationService,
     IRangeService,
     IStatusPanelComp,
+    LocaleService,
     PositionUtils,
     RowPosition,
     ValueService,
@@ -15,7 +16,7 @@ import {
     RefPlaceholder,
     _createCellId,
     _exists,
-    _formatNumberTwoDecimalPlacesAndCommas,
+    _formatNumberCommas,
     _isClientSideRowModel,
     _isRowBefore,
     _isServerSideRowModel,
@@ -25,6 +26,14 @@ import {
 
 import type { AgNameValue } from './agNameValue';
 import { AgNameValueSelector } from './agNameValue';
+
+function _formatNumberTwoDecimalPlacesAndCommas(value: number, localeService: LocaleService): string {
+    if (typeof value !== 'number') {
+        return '';
+    }
+
+    return _formatNumberCommas(Math.round(value * 100) / 100, localeService);
+}
 
 export class AggregationComp extends Component implements IStatusPanelComp {
     private valueService: ValueService;
@@ -101,13 +110,7 @@ export class AggregationComp extends Component implements IStatusPanelComp {
     ) {
         const statusBarValueComponent = this.getAllowedAggregationValueComponent(aggFuncName);
         if (_exists(statusBarValueComponent) && statusBarValueComponent) {
-            const localeTextFunc = this.localeService.getLocaleTextFunc();
-            const thousandSeparator = localeTextFunc('thousandSeparator', ',');
-            const decimalSeparator = localeTextFunc('decimalSeparator', '.');
-
-            statusBarValueComponent.setValue(
-                _formatNumberTwoDecimalPlacesAndCommas(value!, thousandSeparator, decimalSeparator)
-            );
+            statusBarValueComponent.setValue(_formatNumberTwoDecimalPlacesAndCommas(value!, this.localeService));
             statusBarValueComponent.setDisplayed(visible);
         } else {
             // might have previously been visible, so hide now

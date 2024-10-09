@@ -18,7 +18,6 @@ import type { AnyGridOptions } from './propertyKeys';
 import { INITIAL_GRID_OPTION_KEYS, PropertyKeys } from './propertyKeys';
 import { _log } from './utils/function';
 import { _exists } from './utils/generic';
-import { toConstrainedNum, toNumber } from './utils/number';
 import { _logWarn } from './validation/logging';
 import type { ValidationService } from './validation/validationService';
 
@@ -89,6 +88,31 @@ function toBoolean(value: any): boolean {
     }
 
     return false;
+}
+
+function toNumber(value: any): number | undefined {
+    if (typeof value === 'number') {
+        return value;
+    }
+
+    if (typeof value === 'string') {
+        const parsed = parseInt(value);
+        if (isNaN(parsed)) {
+            return undefined;
+        }
+        return parsed;
+    }
+    return undefined;
+}
+
+function toConstrainedNum(min: number, max: number = Number.MAX_VALUE): (value: any) => number | undefined {
+    return (value: any) => {
+        const num = toNumber(value);
+        if (num == null || num < min || num > max) {
+            return undefined; // return undefined if outside bounds, this will then be coerced to the default value.
+        }
+        return num;
+    };
 }
 
 /**

@@ -31,7 +31,6 @@ import type { PaginationService } from '../pagination/paginationService';
 import type { PinnedRowModel } from '../pinnedRowModel/pinnedRowModel';
 import { _removeFromArray } from '../utils/array';
 import { _exists } from '../utils/generic';
-import { _createArrayOfNumbers } from '../utils/number';
 import { _getAllValuesInObject, _iterateObject } from '../utils/object';
 import type { CellCtrl } from './cell/cellCtrl';
 import { DOM_DATA_KEY_CELL_CTRL } from './cell/cellCtrl';
@@ -961,7 +960,10 @@ export class RowRenderer extends BeanStub implements NamedBean {
 
     private calculateIndexesToDraw(rowsToRecycle?: { [key: string]: RowCtrl } | null): number[] {
         // all in all indexes in the viewport
-        const indexesToDraw = _createArrayOfNumbers(this.firstRenderedRow, this.lastRenderedRow);
+        const indexesToDraw: number[] = [];
+        for (let i = this.firstRenderedRow; i <= this.lastRenderedRow; i++) {
+            indexesToDraw.push(i);
+        }
 
         const checkRowToDraw = (indexStr: string, rowComp: RowCtrl) => {
             const index = rowComp.getRowNode().rowIndex;
