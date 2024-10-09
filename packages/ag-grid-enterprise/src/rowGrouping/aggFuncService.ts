@@ -1,5 +1,5 @@
 import type { AgColumn, IAggFunc, IAggFuncParams, IAggFuncService, NamedBean } from 'ag-grid-community';
-import { BeanStub, _exists, _iterateObject, _last } from 'ag-grid-community';
+import { BeanStub, _exists, _last } from 'ag-grid-community';
 
 const defaultAggFuncNames = {
     sum: 'Sum',
@@ -71,7 +71,10 @@ export class AggFuncService extends BeanStub implements NamedBean, IAggFuncServi
 
     public addAggFuncs(aggFuncs?: { [key: string]: IAggFunc }): void {
         this.init();
-        _iterateObject(aggFuncs, (key: string, aggFunc: IAggFunc) => {
+        if (!aggFuncs) {
+            return;
+        }
+        Object.entries(aggFuncs).forEach(([key, aggFunc]) => {
             this.aggFuncsMap[key] = aggFunc;
         });
     }

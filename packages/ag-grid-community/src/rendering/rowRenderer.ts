@@ -31,7 +31,6 @@ import type { PaginationService } from '../pagination/paginationService';
 import type { PinnedRowModel } from '../pinnedRowModel/pinnedRowModel';
 import { _removeFromArray } from '../utils/array';
 import { _exists } from '../utils/generic';
-import { _getAllValuesInObject, _iterateObject } from '../utils/object';
 import type { CellCtrl } from './cell/cellCtrl';
 import { DOM_DATA_KEY_CELL_CTRL } from './cell/cellCtrl';
 import type { StickyRowFeature } from './features/stickyRowFeature';
@@ -206,8 +205,8 @@ export class RowRenderer extends BeanStub implements NamedBean {
     }
 
     private updateAllRowCtrls(): void {
-        const liveList = _getAllValuesInObject(this.rowCtrlsByRowIndex);
-        const zombieList = _getAllValuesInObject(this.zombieRowCtrls);
+        const liveList = Object.values(this.rowCtrlsByRowIndex);
+        const zombieList = Object.values(this.zombieRowCtrls);
         const cachedList = this.cachedRowCtrls ? this.cachedRowCtrls.getEntries() : [];
 
         if (zombieList.length > 0 || cachedList.length > 0) {
@@ -852,7 +851,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
     private getRowsToRecycle(): RowCtrlByRowNodeIdMap {
         // remove all stub nodes, they can't be reused, as no rowNode id
         const stubNodeIndexes: string[] = [];
-        _iterateObject(this.rowCtrlsByRowIndex, (index, rowCtrl) => {
+        Object.entries(this.rowCtrlsByRowIndex).forEach(([index, rowCtrl]) => {
             const stubNode = rowCtrl.getRowNode().id == null;
             if (stubNode) {
                 stubNodeIndexes.push(index);
@@ -862,7 +861,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
 
         // then clear out rowCompsByIndex, but before that take a copy, but index by id, not rowIndex
         const ctrlsByIdMap: RowCtrlByRowNodeIdMap = {};
-        _iterateObject(this.rowCtrlsByRowIndex, (_, rowCtrl) => {
+        Object.values(this.rowCtrlsByRowIndex).forEach((rowCtrl) => {
             const rowNode = rowCtrl.getRowNode();
             ctrlsByIdMap[rowNode.id!] = rowCtrl;
         });
@@ -965,7 +964,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
             indexesToDraw.push(i);
         }
 
-        const checkRowToDraw = (indexStr: string, rowComp: RowCtrl) => {
+        const checkRowToDraw = (rowComp: RowCtrl) => {
             const index = rowComp.getRowNode().rowIndex;
             if (index == null) {
                 return;
@@ -978,10 +977,12 @@ export class RowRenderer extends BeanStub implements NamedBean {
         };
 
         // if we are redrawing due to scrolling change, then old rows are in this.rowCompsByIndex
-        _iterateObject(this.rowCtrlsByRowIndex, checkRowToDraw);
+        Object.values(this.rowCtrlsByRowIndex).forEach(checkRowToDraw);
 
         // if we are redrawing due to model update, then old rows are in rowsToRecycle
-        _iterateObject(rowsToRecycle, checkRowToDraw);
+        if (rowsToRecycle) {
+            Object.values(rowsToRecycle).forEach(checkRowToDraw);
+        }
 
         indexesToDraw.sort((a, b) => a - b);
 
@@ -1148,7 +1149,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
 
     private destroyRowCtrls(rowCtrlsMap: RowCtrlIdMap | null | undefined, animate: boolean): void {
         const executeInAWhileFuncs: (() => void)[] = [];
-        _iterateObject(rowCtrlsMap, (nodeId, rowCtrl) => {
+        Object.values(rowCtrlsMap ?? []).forEach((rowCtrl) => {
             // if row was used, then it's null
             if (!rowCtrl) {
                 return;

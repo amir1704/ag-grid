@@ -7,7 +7,7 @@ import type { ColDef, ColGroupDef } from '../entities/colDef';
 import { DefaultColumnTypes } from '../entities/defaultColumnTypes';
 import type { ColumnEventType } from '../events';
 import { _isColumnsSortingCoupledToGroup } from '../gridOptionsUtils';
-import { _iterateObject, _mergeDeep } from '../utils/object';
+import { _mergeDeep } from '../utils/object';
 import { _logWarn } from '../validation/logging';
 import { ColumnKeyCreator } from './columnKeyCreator';
 import { convertColumnTypes } from './columnUtils';
@@ -497,7 +497,7 @@ export class ColumnFactory extends BeanStub implements NamedBean {
         const allColumnTypes = Object.assign({}, DefaultColumnTypes);
         const userTypes = this.gos.get('columnTypes') || {};
 
-        _iterateObject(userTypes, (key, value) => {
+        Object.entries(userTypes).forEach(([key, value]) => {
             if (key in allColumnTypes) {
                 // default column types cannot be overridden
                 _logWarn(34, { key });

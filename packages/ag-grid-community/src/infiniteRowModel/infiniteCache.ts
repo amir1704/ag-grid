@@ -8,7 +8,6 @@ import type { RowRenderer } from '../rendering/rowRenderer';
 import type { RowNodeBlockLoader } from '../rowNodeCache/rowNodeBlockLoader';
 import { _log } from '../utils/function';
 import { _exists } from '../utils/generic';
-import { _getAllValuesInObject } from '../utils/object';
 import { InfiniteBlock } from './infiniteBlock';
 
 export interface InfiniteCacheParams {
@@ -249,7 +248,7 @@ export class InfiniteCache extends BeanStub {
     public getBlocksInOrder(): InfiniteBlock[] {
         // get all page id's as NUMBERS (not strings, as we need to sort as numbers) and in descending order
         const blockComparator = (a: InfiniteBlock, b: InfiniteBlock) => a.getId() - b.getId();
-        const blocks = _getAllValuesInObject(this.blocks).sort(blockComparator);
+        const blocks = Object.values(this.blocks).sort(blockComparator);
         return blocks;
     }
 

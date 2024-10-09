@@ -8,7 +8,6 @@ import { _getRowIdCallback } from '../gridOptionsUtils';
 import type { ISelectionService } from '../interfaces/iSelectionService';
 import type { RowDataTransaction } from '../interfaces/rowDataTransaction';
 import type { RowNodeTransaction } from '../interfaces/rowNodeTransaction';
-import { _cloneObject } from '../utils/object';
 import { _logError, _logWarn } from '../validation/logging';
 
 const ROOT_NODE_ID = 'ROOT_NODE_ID';
@@ -80,7 +79,9 @@ export class ClientSideNodeManager {
     }
 
     public getCopyOfNodesMap(): { [id: string]: RowNode } {
-        return _cloneObject(this.allNodesMap);
+        return {
+            ...this.allNodesMap,
+        };
     }
 
     public getRowNode(id: string): RowNode | undefined {

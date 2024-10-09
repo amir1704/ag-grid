@@ -26,7 +26,6 @@ import {
     RowNodeBlock,
     ServerSideTransactionResultStatus,
     _errorOnce,
-    _getAllValuesInObject,
     _getRowIdCallback,
     _missing,
     _warnOnce,
@@ -267,7 +266,7 @@ export class FullStore extends RowNodeBlock implements IServerSideStore {
         this.createOrRecycleNodes(nodesToRecycle, params.rowData);
 
         if (nodesToRecycle) {
-            this.blockUtils.destroyRowNodes(_getAllValuesInObject(nodesToRecycle));
+            this.blockUtils.destroyRowNodes(Object.values(nodesToRecycle));
         }
 
         if (this.level === 0) {

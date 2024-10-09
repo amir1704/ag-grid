@@ -26,7 +26,6 @@ import type { IRowModel } from '../interfaces/iRowModel';
 import type { UserCompDetails } from '../interfaces/iUserCompDetails';
 import type { RowRenderer } from '../rendering/rowRenderer';
 import { _exists, _jsonEquals } from '../utils/generic';
-import { _cloneObject } from '../utils/object';
 import { AgPromise } from '../utils/promise';
 import { _logWarn } from '../validation/logging';
 import type { ValueService } from '../valueService/valueService';
@@ -551,7 +550,7 @@ export class ColumnFilterService extends BeanStub implements NamedBean {
     public createFilterParams(column: AgColumn, colDef: ColDef): IFilterParams {
         const params: IFilterParams = this.gos.addGridCommonParams({
             column,
-            colDef: _cloneObject(colDef),
+            colDef,
             rowModel: this.rowModel,
             filterChangedCallback: () => {},
             filterModifiedCallback: () => {},

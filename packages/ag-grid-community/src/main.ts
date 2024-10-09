@@ -940,7 +940,7 @@ export { _fuzzySuggestions } from './utils/fuzzyMatch';
 export { _exists, _missing, _jsonEquals, _toStringOrNull, _makeNull, _defaultComparator } from './utils/generic';
 export { _isEventFromPrintableCharacter } from './utils/keyboard';
 export { _formatNumberCommas } from './utils/number';
-export { _iterateObject, _cloneObject, _getAllValuesInObject, _mergeDeep } from './utils/object';
+export { _mergeDeep } from './utils/object';
 export { _capitalise, _escapeString, _utf8_encode } from './utils/string';
 export { AgPromise } from './utils/promise';
 export { _addFocusableContainerListener } from './utils/focus';

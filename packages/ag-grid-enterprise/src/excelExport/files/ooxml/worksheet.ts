@@ -11,7 +11,7 @@ import type {
     ExcelWorksheet,
     XmlElement,
 } from 'ag-grid-community';
-import { _escapeString, _iterateObject } from 'ag-grid-community';
+import { _escapeString } from 'ag-grid-community';
 
 import type { ExcelDataTable, ExcelHeaderFooterPosition } from '../../assets/excelInterfaces';
 import { getExcelColumnName } from '../../assets/excelUtils';
@@ -165,7 +165,7 @@ const replaceHeaderFooterTokens = (value: string): string => {
         '&[Picture]': '&G',
     };
 
-    _iterateObject<string>(map, (key, val) => {
+    Object.entries(map).forEach(([key, val]) => {
         value = value.replace(key, val);
     });
 
