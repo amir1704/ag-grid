@@ -8,7 +8,6 @@ import type { RowRenderer } from '../rendering/rowRenderer';
 import type { RowNodeBlockLoader } from '../rowNodeCache/rowNodeBlockLoader';
 import { _log } from '../utils/function';
 import { _exists } from '../utils/generic';
-import { NumberSequence } from '../utils/numberSequence';
 import { _getAllValuesInObject } from '../utils/object';
 import { InfiniteBlock } from './infiniteBlock';
 
@@ -21,7 +20,7 @@ export interface InfiniteCacheParams {
     filterModel: any;
     maxBlocksInCache?: number;
     rowHeight: number;
-    lastAccessedSequence: NumberSequence;
+    lastAccessedSequence: { value: number };
     rowNodeBlockLoader?: RowNodeBlockLoader;
     dynamicRowHeight: boolean;
 }
@@ -243,7 +242,7 @@ export class InfiniteCache extends BeanStub {
     }
 
     public forEachNodeDeep(callback: (rowNode: RowNode, index: number) => void): void {
-        const sequence = new NumberSequence();
+        const sequence = { value: 0 };
         this.getBlocksInOrder().forEach((block) => block.forEachNode(callback, sequence, this.rowCount));
     }
 
@@ -310,7 +309,7 @@ export class InfiniteCache extends BeanStub {
 
         let lastBlockId = -1;
         let inActiveRange = false;
-        const numberSequence: NumberSequence = new NumberSequence();
+        const numberSequence = { value: 0 };
 
         let foundGapInSelection = false;
 

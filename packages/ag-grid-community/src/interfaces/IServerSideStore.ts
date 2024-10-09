@@ -1,5 +1,4 @@
 import type { Bean } from '../context/bean';
-import type { NumberSequence } from '../utils/numberSequence';
 import type { RowBounds } from './iRowModel';
 import type { IRowNode } from './iRowNode';
 import type { ServerSideTransaction, ServerSideTransactionResult } from './serverSideTransaction';
@@ -8,12 +7,12 @@ export interface IServerSideStore extends Bean {
     clearDisplayIndexes(): void;
     getDisplayIndexEnd(): number | undefined;
     isDisplayIndexInStore(displayIndex: number): boolean;
-    setDisplayIndexes(displayIndexSeq: NumberSequence, nextRowTop: { value: number }, uiLevel: number): void;
-    forEachStoreDeep(callback: (rowNode: IServerSideStore, index: number) => void, sequence?: NumberSequence): void;
-    forEachNodeDeep(callback: (rowNode: IRowNode, index: number) => void, sequence?: NumberSequence): void;
+    setDisplayIndexes(displayIndexSeq: { value: number }, nextRowTop: { value: number }, uiLevel: number): void;
+    forEachStoreDeep(callback: (rowNode: IServerSideStore, index: number) => void, sequence?: { value: number }): void;
+    forEachNodeDeep(callback: (rowNode: IRowNode, index: number) => void, sequence?: { value: number }): void;
     forEachNodeDeepAfterFilterAndSort(
         callback: (rowNode: IRowNode, index: number) => void,
-        sequence?: NumberSequence,
+        sequence?: { value: number },
         includeFooterNodes?: boolean
     ): void;
     retryLoads(): void;

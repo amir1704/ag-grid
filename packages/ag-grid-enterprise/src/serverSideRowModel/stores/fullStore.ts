@@ -23,7 +23,6 @@ import type {
     WithoutGridCommon,
 } from 'ag-grid-community';
 import {
-    NumberSequence,
     RowNodeBlock,
     ServerSideTransactionResultStatus,
     _errorOnce,
@@ -71,7 +70,7 @@ export class FullStore extends RowNodeBlock implements IServerSideStore {
     private readonly ssrmParams: SSRMParams;
     private readonly parentRowNode: RowNode;
 
-    private nodeIdSequence: NumberSequence = new NumberSequence();
+    private nodeIdSequence = { value: 0 };
 
     private usingTreeData: boolean;
 
@@ -213,7 +212,7 @@ export class FullStore extends RowNodeBlock implements IServerSideStore {
             this.allRowNodes.push(rowNode);
         }
 
-        const defaultId = this.prefixId(this.nodeIdSequence.next());
+        const defaultId = this.prefixId(this.nodeIdSequence.value++);
         this.blockUtils.setDataIntoRowNode(rowNode, data, defaultId, undefined);
         this.nodeManager.addRowNode(rowNode);
 
@@ -393,8 +392,8 @@ export class FullStore extends RowNodeBlock implements IServerSideStore {
         return displayIndex >= this.displayIndexStart! && displayIndex < this.displayIndexEnd!;
     }
 
-    public setDisplayIndexes(displayIndexSeq: NumberSequence, nextRowTop: { value: number }, uiLevel: number): void {
-        this.displayIndexStart = displayIndexSeq.peek();
+    public setDisplayIndexes(displayIndexSeq: { value: number }, nextRowTop: { value: number }, uiLevel: number): void {
+        this.displayIndexStart = displayIndexSeq.value;
         this.topPx = nextRowTop.value;
 
         const visibleNodeIds: { [id: string]: boolean } = {};
@@ -412,15 +411,12 @@ export class FullStore extends RowNodeBlock implements IServerSideStore {
             }
         });
 
-        this.displayIndexEnd = displayIndexSeq.peek();
+        this.displayIndexEnd = displayIndexSeq.value;
         this.heightPx = nextRowTop.value - this.topPx;
     }
 
-    public forEachStoreDeep(
-        callback: (store: IServerSideStore, index: number) => void,
-        sequence = new NumberSequence()
-    ): void {
-        callback(this, sequence.next());
+    public forEachStoreDeep(callback: (store: IServerSideStore, index: number) => void, sequence = { value: 0 }): void {
+        callback(this, sequence.value++);
         this.allRowNodes.forEach((rowNode) => {
             const childCache = rowNode.childStore;
             if (childCache) {
@@ -429,9 +425,9 @@ export class FullStore extends RowNodeBlock implements IServerSideStore {
         });
     }
 
-    public forEachNodeDeep(callback: (rowNode: RowNode, index: number) => void, sequence = new NumberSequence()): void {
+    public forEachNodeDeep(callback: (rowNode: RowNode, index: number) => void, sequence = { value: 0 }): void {
         this.allRowNodes.forEach((rowNode) => {
-            callback(rowNode, sequence.next());
+            callback(rowNode, sequence.value++);
             const childCache = rowNode.childStore;
             if (childCache) {
                 childCache.forEachNodeDeep(callback, sequence);
@@ -441,11 +437,11 @@ export class FullStore extends RowNodeBlock implements IServerSideStore {
 
     public forEachNodeDeepAfterFilterAndSort(
         callback: (rowNode: RowNode, index: number) => void,
-        sequence = new NumberSequence(),
+        sequence = { value: 0 },
         includeFooterNodes = false
     ): void {
         this.nodesAfterSort.forEach((rowNode) => {
-            callback(rowNode, sequence.next());
+            callback(rowNode, sequence.value++);
             const childCache = rowNode.childStore;
             if (childCache) {
                 childCache.forEachNodeDeepAfterFilterAndSort(callback, sequence, includeFooterNodes);
@@ -453,7 +449,7 @@ export class FullStore extends RowNodeBlock implements IServerSideStore {
         });
 
         if (includeFooterNodes && this.parentRowNode.sibling) {
-            callback(this.parentRowNode.sibling, sequence.next());
+            callback(this.parentRowNode.sibling, sequence.value++);
         }
     }
 
