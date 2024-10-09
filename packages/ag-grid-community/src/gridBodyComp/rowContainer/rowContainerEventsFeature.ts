@@ -19,7 +19,6 @@ import type { UndoRedoService } from '../../undoRedo/undoRedoService';
 import { _last } from '../../utils/array';
 import { _isIOSUserAgent } from '../../utils/browser';
 import { _getCtrlForEventTarget, _isEventSupported, _isStopPropagationForAgGrid } from '../../utils/event';
-import { _missingOrEmpty } from '../../utils/generic';
 import {
     _isEventFromPrintableCharacter,
     _isUserSuppressingKeyboardEvent,
@@ -285,7 +284,7 @@ export class RowContainerEventsFeature extends BeanStub {
             }
 
             const allDisplayedColumns = this.visibleColsService.allCols;
-            if (_missingOrEmpty(allDisplayedColumns)) {
+            if (!allDisplayedColumns?.length) {
                 return;
             }
 

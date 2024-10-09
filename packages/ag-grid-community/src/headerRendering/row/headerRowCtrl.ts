@@ -6,7 +6,6 @@ import type { AgColumnGroup } from '../../entities/agColumnGroup';
 import { _isDomLayout } from '../../gridOptionsUtils';
 import type { BrandedType } from '../../interfaces/brandedType';
 import type { ColumnPinnedType, HeaderColumnId } from '../../interfaces/iColumn';
-import { _values } from '../../utils/generic';
 import type { AbstractHeaderCellCtrl } from '../cells/abstractCell/abstractHeaderCellCtrl';
 import { HeaderCellCtrl } from '../cells/column/headerCellCtrl';
 import type { HeaderGroupCellCtrl } from '../cells/columnGroup/headerGroupCellCtrl';
@@ -130,7 +129,7 @@ export class HeaderRowCtrl extends BeanStub {
         if (!this.headerCellCtrls) {
             return;
         }
-        return _values(this.headerCellCtrls).find((cellCtrl) => cellCtrl.getColumnGroupChild() === column);
+        return Array.from(this.headerCellCtrls.values()).find((cellCtrl) => cellCtrl.getColumnGroupChild() === column);
     }
 
     private onDisplayedColumnsChanged(): void {

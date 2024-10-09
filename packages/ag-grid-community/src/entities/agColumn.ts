@@ -19,7 +19,7 @@ import type {
 import type { IFrameworkEventListenerService } from '../interfaces/iFrameworkEventListenerService';
 import type { IRowNode } from '../interfaces/iRowNode';
 import { LocalEventService } from '../localEventService';
-import { _attrToNumber, _exists, _missing } from '../utils/generic';
+import { _exists, _missing } from '../utils/generic';
 import { _mergeDeep } from '../utils/object';
 import type { AgColumnGroup } from './agColumnGroup';
 import type { AgProvidedColumnGroup } from './agProvidedColumnGroup';
@@ -263,8 +263,8 @@ export class AgColumn<TValue = any> extends BeanStub<ColumnEventName> implements
 
     private calculateColInitialWidth(colDef: ColDef): number {
         let width: number;
-        const colDefWidth = _attrToNumber(colDef.width);
-        const colDefInitialWidth = _attrToNumber(colDef.initialWidth);
+        const colDefWidth = colDef.width;
+        const colDefInitialWidth = colDef.initialWidth;
 
         if (colDefWidth != null) {
             width = colDefWidth;

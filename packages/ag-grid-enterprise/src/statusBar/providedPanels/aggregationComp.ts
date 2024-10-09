@@ -20,7 +20,6 @@ import {
     _isRowBefore,
     _isServerSideRowModel,
     _missing,
-    _missingOrEmpty,
     _warnOnce,
 } from 'ag-grid-community';
 
@@ -146,7 +145,7 @@ export class AggregationComp extends Component implements IStatusPanelComp {
 
         const cellsSoFar: any = {};
 
-        if (cellRanges && !_missingOrEmpty(cellRanges) && this.rangeService) {
+        if (cellRanges?.length && this.rangeService) {
             for (let i = 0; i < cellRanges.length; i++) {
                 const cellRange = cellRanges[i];
 

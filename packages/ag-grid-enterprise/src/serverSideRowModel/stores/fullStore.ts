@@ -30,7 +30,6 @@ import {
     _getAllValuesInObject,
     _getRowIdCallback,
     _missing,
-    _missingOrEmpty,
     _warnOnce,
 } from 'ag-grid-community';
 
@@ -643,7 +642,7 @@ export class FullStore extends RowNodeBlock implements IServerSideStore {
 
     private executeAdd(rowDataTran: ServerSideTransaction, rowNodeTransaction: ServerSideTransactionResult): void {
         const { add, addIndex } = rowDataTran;
-        if (_missingOrEmpty(add)) {
+        if (!add?.length) {
             return;
         }
 

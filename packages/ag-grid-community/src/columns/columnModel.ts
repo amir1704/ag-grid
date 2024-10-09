@@ -29,7 +29,6 @@ import type { IPivotResultColsService } from '../interfaces/iPivotResultColsServ
 import type { IShowRowGroupColsService } from '../interfaces/iShowRowGroupColsService';
 import type { ColumnAnimationService } from '../rendering/columnAnimationService';
 import { _areEqual, _moveInArray } from '../utils/array';
-import { _missingOrEmpty } from '../utils/generic';
 import { _logWarn } from '../validation/logging';
 import type { ValueCache } from '../valueService/valueCache';
 import type { ColumnDefFactory } from './columnDefFactory';
@@ -453,7 +452,7 @@ export class ColumnModel extends BeanStub implements NamedBean {
         if (!this.cols) {
             return;
         }
-        if (_missingOrEmpty(keys)) {
+        if (!keys?.length) {
             return;
         }
 
@@ -825,7 +824,7 @@ export class ColumnModel extends BeanStub implements NamedBean {
     // + clientSideRowModel
     public isPivotActive(): boolean {
         const pivotColumns = this.funcColsService.pivotCols;
-        return this.pivotMode && !_missingOrEmpty(pivotColumns);
+        return this.pivotMode && !!pivotColumns?.length;
     }
 
     // called when dataTypes change

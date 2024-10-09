@@ -12,7 +12,7 @@ import type {
     RowNodeBlock,
     StoreRefreshAfterParams,
 } from 'ag-grid-community';
-import { BeanStub, _isServerSideRowModel, _missingOrEmpty, _warnOnce } from 'ag-grid-community';
+import { BeanStub, _isServerSideRowModel, _warnOnce } from 'ag-grid-community';
 
 import type { SSRMParams, ServerSideRowModel } from '../serverSideRowModel';
 import type { StoreFactory } from './storeFactory';
@@ -80,7 +80,7 @@ export class StoreUtils extends BeanStub implements NamedBean {
         currentCache: IServerSideStore,
         findNodeFunc: (key: string) => RowNode | null
     ): IServerSideStore | null {
-        if (_missingOrEmpty(keys)) {
+        if (!keys?.length) {
             return currentCache;
         }
 

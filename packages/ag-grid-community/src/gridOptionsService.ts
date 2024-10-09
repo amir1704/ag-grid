@@ -17,7 +17,7 @@ import { _isModuleRegistered } from './modules/moduleRegistry';
 import type { AnyGridOptions } from './propertyKeys';
 import { INITIAL_GRID_OPTION_KEYS, PropertyKeys } from './propertyKeys';
 import { _log } from './utils/function';
-import { _exists, toBoolean } from './utils/generic';
+import { _exists } from './utils/generic';
 import { toConstrainedNum, toNumber } from './utils/number';
 import { _logWarn } from './validation/logging';
 import type { ValidationService } from './validation/validationService';
@@ -76,6 +76,20 @@ export interface PropertyValueChangedEvent<K extends keyof GridOptions> extends 
 
 export type PropertyChangedListener = (event: PropertyChangedEvent) => void;
 export type PropertyValueChangedListener<K extends keyof GridOptions> = (event: PropertyValueChangedEvent<K>) => void;
+
+function toBoolean(value: any): boolean {
+    if (typeof value === 'boolean') {
+        return value;
+    }
+
+    if (typeof value === 'string') {
+        // for boolean, compare to empty String to allow attributes appearing with
+        // no value to be treated as 'true'
+        return value.toUpperCase() === 'TRUE' || value == '';
+    }
+
+    return false;
+}
 
 /**
  * Handles value coercion including validation of ranges etc. If value is invalid, undefined is set, allowing default to be used.

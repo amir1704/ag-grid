@@ -31,7 +31,7 @@ import type { RowNodeTransaction } from '../interfaces/rowNodeTransaction';
 import { _last, _removeFromArray } from '../utils/array';
 import { ChangedPath } from '../utils/changedPath';
 import { _debounce } from '../utils/function';
-import { _exists, _missing, _missingOrEmpty } from '../utils/generic';
+import { _exists, _missing } from '../utils/generic';
 import { _logError } from '../validation/logging';
 import type { ValueCache } from '../valueService/valueCache';
 import { ClientSideNodeManager } from './clientSideNodeManager';
@@ -574,7 +574,7 @@ export class ClientSideRowModel extends BeanStub implements IClientSideRowModel,
         // the impacted parent rows are recalculated, parents who's children have
         // not changed are not impacted.
 
-        const noTransactions = _missingOrEmpty(rowNodeTransactions);
+        const noTransactions = !rowNodeTransactions?.length;
 
         const changedPath = new ChangedPath(false, this.rootNode);
 

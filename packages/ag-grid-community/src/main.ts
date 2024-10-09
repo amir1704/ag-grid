@@ -937,16 +937,7 @@ export { _log, _warnOnce, _errorOnce, _debounce, _doOnce, _waitUntil } from './u
 export { _logWarn, _logError } from './validation/logging';
 export { _createIcon, _createIconNoSpan } from './utils/icon';
 export { _fuzzySuggestions } from './utils/fuzzyMatch';
-export {
-    _exists,
-    _missing,
-    _missingOrEmpty,
-    _jsonEquals,
-    _toStringOrNull,
-    _values,
-    _makeNull,
-    _defaultComparator,
-} from './utils/generic';
+export { _exists, _missing, _jsonEquals, _toStringOrNull, _makeNull, _defaultComparator } from './utils/generic';
 export { _isEventFromPrintableCharacter } from './utils/keyboard';
 export { NumberSequence } from './utils/numberSequence';
 export { _formatNumberTwoDecimalPlacesAndCommas, _formatNumberCommas } from './utils/number';
