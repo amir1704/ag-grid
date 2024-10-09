@@ -9,13 +9,16 @@ export abstract class BaseExpansionService extends BeanStub {
         }
     }
 
-    public setupRowExpandedListeners(rowCtrl: RowCtrl): void {
+    public getRowExpandedListeners(rowCtrl: RowCtrl): {
+        expandedChanged: () => void;
+        hasChildrenChanged: () => void;
+    } {
         const rowNode = rowCtrl.getRowNode();
         const updateExpandedCss = this.updateExpandedCss.bind(this, rowCtrl, rowNode);
-        rowCtrl.addManagedListeners(rowNode, {
+        return {
             expandedChanged: updateExpandedCss,
             hasChildrenChanged: updateExpandedCss,
-        });
+        };
     }
 
     private updateExpandedCss(rowCtrl: RowCtrl, rowNode: RowNode): void {

@@ -4,7 +4,10 @@ import type { RowCtrl } from '../rendering/row/rowCtrl';
 export interface IExpansionService {
     addExpandedCss(classes: string[], rowNode: RowNode): void;
 
-    setupRowExpandedListeners(rowCtrl: RowCtrl): void;
+    getRowExpandedListeners(rowCtrl: RowCtrl): {
+        expandedChanged: () => void;
+        hasChildrenChanged: () => void;
+    };
 
     expandRows(rowIds: string[]): void;
 

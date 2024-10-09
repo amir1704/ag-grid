@@ -698,8 +698,8 @@ export class RowCtrl extends BeanStub<RowCtrlEvent> {
             rowSelected: () => this.onRowSelected(),
             rowIndexChanged: this.onRowIndexChanged.bind(this),
             topChanged: this.onTopChanged.bind(this),
+            ...(this.beans.expansionService?.getRowExpandedListeners(this) ?? {}),
         });
-        this.beans.expansionService?.setupRowExpandedListeners(this);
 
         if (this.rowNode.detail) {
             // if the master row node has updated data, we also want to try to refresh the detail row
