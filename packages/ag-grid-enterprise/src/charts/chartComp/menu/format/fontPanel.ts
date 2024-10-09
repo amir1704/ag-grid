@@ -1,5 +1,5 @@
 import type { AgSelectParams, BeanCollection } from 'ag-grid-community';
-import { AgSelectSelector, Component, RefPlaceholder, _capitalise, _removeFromParent } from 'ag-grid-community';
+import { AgSelectSelector, Component, RefPlaceholder, _removeFromParent } from 'ag-grid-community';
 
 import type { AgGroupComponent, AgGroupComponentParams } from '../../../../widgets/agGroupComponent';
 import { AgGroupComponentSelector } from '../../../../widgets/agGroupComponent';
@@ -24,6 +24,10 @@ export interface FontPanelParams {
     chartMenuParamsFactory: ChartMenuParamsFactory;
     keyMapper: (key: string) => string;
     cssIdentifier?: string;
+}
+
+function _capitalise(str: string): string {
+    return str[0].toUpperCase() + str.substring(1).toLowerCase();
 }
 
 export class FontPanel extends Component {

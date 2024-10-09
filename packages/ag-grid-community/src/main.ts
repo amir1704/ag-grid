@@ -941,7 +941,7 @@ export { _exists, _missing, _jsonEquals, _toStringOrNull, _makeNull, _defaultCom
 export { _isEventFromPrintableCharacter } from './utils/keyboard';
 export { _formatNumberCommas } from './utils/number';
 export { _mergeDeep } from './utils/object';
-export { _capitalise, _escapeString, _utf8_encode } from './utils/string';
+export { _escapeString } from './utils/string';
 export { AgPromise } from './utils/promise';
 export { _addFocusableContainerListener } from './utils/focus';
 

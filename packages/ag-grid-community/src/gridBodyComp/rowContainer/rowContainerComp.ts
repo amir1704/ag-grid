@@ -46,6 +46,7 @@ export class RowContainerComp extends Component {
     constructor(params?: { name: string }) {
         super();
         this.name = params?.name as RowContainerName;
+        console.log(this.name);
         this.options = _getRowContainerOptions(this.name);
         this.setTemplate(templateFactory(this.options));
     }
