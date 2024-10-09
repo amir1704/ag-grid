@@ -36,7 +36,6 @@ import type { RowPosition } from '../../interfaces/iRowPosition';
 import type { UserCompDetails } from '../../interfaces/iUserCompDetails';
 import { calculateRowLevel } from '../../styling/rowStyleService';
 import { _setAriaExpanded, _setAriaRowIndex } from '../../utils/aria';
-import { _pushAll } from '../../utils/array';
 import { _addOrRemoveAttribute, _isElementChildOfClass, _isFocusableFormField, _isVisible } from '../../utils/dom';
 import { _isStopPropagationForAgGrid } from '../../utils/event';
 import { _executeNextVMTurn } from '../../utils/function';
@@ -1234,8 +1233,9 @@ export class RowCtrl extends BeanStub<RowCtrlEvent> {
     }
 
     private postProcessClassesFromGridOptions(): void {
-        const cssClasses = this.beans.rowStyleService?.processClassesFromGridOptions(this.rowNode);
-        if (!cssClasses || !cssClasses.length) {
+        const cssClasses: string[] = [];
+        this.beans.rowStyleService?.processClassesFromGridOptions(cssClasses, this.rowNode);
+        if (!cssClasses.length) {
             return;
         }
 
@@ -1316,8 +1316,8 @@ export class RowCtrl extends BeanStub<RowCtrlEvent> {
 
         const { rowStyleService } = beans;
         if (rowStyleService) {
-            _pushAll(classes, rowStyleService.processClassesFromGridOptions(rowNode));
-            _pushAll(classes, rowStyleService.preProcessRowClassRules(rowNode));
+            rowStyleService.processClassesFromGridOptions(classes, rowNode);
+            rowStyleService.preProcessRowClassRules(classes, rowNode);
         }
 
         // we use absolute position unless we are doing print layout

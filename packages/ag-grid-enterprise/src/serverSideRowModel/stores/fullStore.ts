@@ -14,14 +14,12 @@ import type {
     RowNode,
     RowNodeBlockLoader,
     RowNodeSorter,
-    SelectionChangedEvent,
     ServerSideGroupLevelParams,
     ServerSideGroupLevelState,
     ServerSideTransaction,
     ServerSideTransactionResult,
     SortController,
     StoreRefreshAfterParams,
-    StoreUpdatedEvent,
     WithoutGridCommon,
 } from 'ag-grid-community';
 import {
@@ -31,7 +29,6 @@ import {
     _errorOnce,
     _getAllValuesInObject,
     _getRowIdCallback,
-    _insertIntoArray,
     _missing,
     _missingOrEmpty,
     _warnOnce,
@@ -212,7 +209,7 @@ export class FullStore extends RowNodeBlock implements IServerSideStore {
         });
 
         if (index != null) {
-            _insertIntoArray(this.allRowNodes, rowNode, index);
+            this.allRowNodes.splice(index, 0, rowNode);
         } else {
             this.allRowNodes.push(rowNode);
         }

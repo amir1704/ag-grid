@@ -26,14 +26,12 @@ export class RowStyleService extends BeanStub implements NamedBean {
         this.expressionService = beans.expressionService;
     }
 
-    public processClassesFromGridOptions(rowNode: RowNode): string[] {
-        const res: string[] = [];
-
+    public processClassesFromGridOptions(classes: string[], rowNode: RowNode): void {
         const process = (rowCls: string | string[] | undefined) => {
             if (typeof rowCls === 'string') {
-                res.push(rowCls);
+                classes.push(rowCls);
             } else if (Array.isArray(rowCls)) {
-                rowCls.forEach((e) => res.push(e));
+                rowCls.forEach((e) => classes.push(e));
             }
         };
 
@@ -42,7 +40,7 @@ export class RowStyleService extends BeanStub implements NamedBean {
         if (rowClass) {
             if (typeof rowClass === 'function') {
                 _warnOnce('rowClass should not be a function, please use getRowClass instead');
-                return [];
+                return;
             }
             process(rowClass);
         }
@@ -59,25 +57,19 @@ export class RowStyleService extends BeanStub implements NamedBean {
             const rowClassFuncResult = rowClassFunc(params);
             process(rowClassFuncResult);
         }
-
-        return res;
     }
 
-    public preProcessRowClassRules(rowNode: RowNode): string[] {
-        const res: string[] = [];
-
+    public preProcessRowClassRules(classes: string[], rowNode: RowNode): void {
         this.processRowClassRules(
             rowNode,
             (className: string) => {
-                res.push(className);
+                classes.push(className);
             },
             () => {
                 // not catered for, if creating, no need
                 // to remove class as it was never there
             }
         );
-
-        return res;
     }
 
     public processRowClassRules(

@@ -15,15 +15,7 @@ import type {
     SortController,
     ValueService,
 } from 'ag-grid-community';
-import {
-    BeanStub,
-    _includes,
-    _isClientSideRowModel,
-    _isServerSideRowModel,
-    _last,
-    _values,
-    _warnOnce,
-} from 'ag-grid-community';
+import { BeanStub, _isClientSideRowModel, _isServerSideRowModel, _last, _values, _warnOnce } from 'ag-grid-community';
 
 import type { ColState } from '../model/chartDataModel';
 import { DEFAULT_CHART_CATEGORY } from '../model/chartDataModel';
@@ -248,7 +240,7 @@ export class ChartDatasource extends BeanStub {
             extractedRowData = [];
             groupChartData = [];
             for (let i = 0; i < allData.length; i++) {
-                (_includes(groupIndexesToRemove, i) ? groupChartData : extractedRowData).push(allData[i]);
+                (groupIndexesToRemove.includes(i) ? groupChartData : extractedRowData).push(allData[i]);
             }
         }
 

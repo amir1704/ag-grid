@@ -10,7 +10,7 @@ import type { MouseEventService } from '../gridBodyComp/mouseEventService';
 import { _getDocument, _getRootNode } from '../gridOptionsUtils';
 import type { AgGridCommon } from '../interfaces/iCommon';
 import type { DragItem } from '../interfaces/iDragItem';
-import { _flatten, _removeFromArray } from '../utils/array';
+import { _removeFromArray } from '../utils/array';
 import { _getBodyHeight, _getBodyWidth } from '../utils/browser';
 import { _getElementRectWithOffset } from '../utils/dom';
 import { _isFunction } from '../utils/function';
@@ -366,7 +366,7 @@ export class DragAndDropService extends BeanStub implements NamedBean {
         // loop over the sorted elementStack to find which dropTarget comes first
         for (const el of elementStack) {
             for (const dropTarget of validDropTargets) {
-                const containers = _flatten(this.getAllContainersFromDropTarget(dropTarget));
+                const containers = this.getAllContainersFromDropTarget(dropTarget).flatMap((a) => a);
                 if (containers.indexOf(el) !== -1) {
                     return dropTarget;
                 }

@@ -910,19 +910,7 @@ export {
     _setAriaHidden,
     _getAriaPosInSet,
 } from './utils/aria';
-export {
-    _removeFromArray,
-    _last,
-    _insertIntoArray,
-    _includes,
-    _shallowCompare,
-    _flatten,
-    _forEachReverse,
-    _areEqual,
-    _existsAndNotEmpty,
-    _removeRepeatsFromArray,
-    _insertArrayIntoArray,
-} from './utils/array';
+export { _removeFromArray, _last, _areEqual } from './utils/array';
 export { _isIOSUserAgent } from './utils/browser';
 export { ChangedPath } from './utils/changedPath';
 export { _serialiseDate, _parseDateTimeFromString } from './utils/date';

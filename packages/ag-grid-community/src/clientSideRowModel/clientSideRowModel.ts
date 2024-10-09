@@ -28,7 +28,7 @@ import type { IRowNodeStage } from '../interfaces/iRowNodeStage';
 import type { ISelectionService } from '../interfaces/iSelectionService';
 import type { RowDataTransaction } from '../interfaces/rowDataTransaction';
 import type { RowNodeTransaction } from '../interfaces/rowNodeTransaction';
-import { _insertIntoArray, _last, _removeFromArray } from '../utils/array';
+import { _last, _removeFromArray } from '../utils/array';
 import { ChangedPath } from '../utils/changedPath';
 import { _debounce } from '../utils/function';
 import { _exists, _missing, _missingOrEmpty } from '../utils/generic';
@@ -375,7 +375,7 @@ export class ClientSideRowModel extends BeanStub implements IClientSideRowModel,
         });
 
         rowNodes.forEach((rowNode, idx) => {
-            _insertIntoArray(allLeafChildren, rowNode, Math.max(indexAtPixelNow + increment, 0) + idx);
+            allLeafChildren.splice(Math.max(indexAtPixelNow + increment, 0) + idx, 0, rowNode);
         });
 
         rowNodes.forEach((rowNode: ClientSideRowModelRowNode, index) => {
