@@ -255,6 +255,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
                     frameworkComponentWrapper: this.frameworkComponentWrapper,
                 },
                 modules: (this.modules || []) as any,
+                setThemeOnGridDiv: true,
             };
 
             const api = createGrid(this._nativeElement, mergedGridOps, this.gridParams);
@@ -1434,7 +1435,7 @@ export class AgGridAngular<TData = any, TColDef extends ColDef<TData> = ColDef<a
     @Input() public initialState: GridState | undefined = undefined;
     /** Theme to apply to the grid.
      */
-    @Input() public theme: GridTheme | undefined = undefined;
+    @Input() public theme: GridTheme | string | undefined = undefined;
     /** Whether to load supported theme fonts from the Google Fonts server.
      *
      * - `true` -> load fonts automatically if your theme uses them

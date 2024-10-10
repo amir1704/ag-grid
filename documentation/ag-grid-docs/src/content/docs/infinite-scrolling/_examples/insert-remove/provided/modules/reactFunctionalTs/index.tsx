@@ -13,8 +13,6 @@ import type {
 } from 'ag-grid-community';
 import { ModuleRegistry } from 'ag-grid-community';
 import { InfiniteRowModelModule } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
 import type { CustomCellRendererProps } from 'ag-grid-react';
 import { AgGridReact } from 'ag-grid-react';
 

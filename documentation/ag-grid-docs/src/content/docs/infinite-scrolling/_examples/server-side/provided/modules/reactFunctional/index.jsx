@@ -5,8 +5,6 @@ import { createRoot } from 'react-dom/client';
 
 import { ModuleRegistry } from 'ag-grid-community';
 import { InfiniteRowModelModule } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { ColumnsToolPanelModule } from 'ag-grid-enterprise';
 import { MenuModule } from 'ag-grid-enterprise';
 import { SetFilterModule } from 'ag-grid-enterprise';

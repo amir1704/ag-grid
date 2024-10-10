@@ -12,8 +12,6 @@ import type {
     GridReadyEvent,
 } from 'ag-grid-community';
 import { ModuleRegistry } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { ColumnsToolPanelModule } from 'ag-grid-enterprise';
 import { MasterDetailModule } from 'ag-grid-enterprise';
 import { MenuModule } from 'ag-grid-enterprise';

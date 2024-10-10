@@ -2,6 +2,8 @@ import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
 import { createGrid } from 'ag-grid-community';
 import { ModuleRegistry } from 'ag-grid-community';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { ColumnsToolPanelModule } from 'ag-grid-enterprise';
 import { MenuModule } from 'ag-grid-enterprise';
 import { RowGroupingModule } from 'ag-grid-enterprise';
@@ -15,10 +17,10 @@ ModuleRegistry.registerModules([
     SetFilterModule,
 ]);
 
-function changeSize(value: string) {
+function changeSize(value: string, foo?: boolean) {
     const sizes = ['large', 'normal', 'compact'];
 
-    const el = document.querySelector<HTMLElement>('[class*="ag-theme-quartz"]')!;
+    const el = document.getElementById('myGrid')!;
 
     sizes.forEach((size) => el.classList.toggle(size, size === value));
 }
@@ -40,6 +42,7 @@ let gridApi: GridApi<IOlympicData>;
 
 const gridOptions: GridOptions<IOlympicData> = {
     rowData: null,
+    theme: 'ag-theme-quartz',
     columnDefs: columnDefs,
     defaultColDef: {
         editable: true,

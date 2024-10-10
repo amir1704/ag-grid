@@ -1622,7 +1622,7 @@ export interface GridOptions<TData = any> {
     /**
      * Theme to apply to the grid.
      */
-    theme?: GridTheme;
+    theme?: GridTheme | string;
 
     /**
      * Whether to load supported theme fonts from the Google Fonts server.

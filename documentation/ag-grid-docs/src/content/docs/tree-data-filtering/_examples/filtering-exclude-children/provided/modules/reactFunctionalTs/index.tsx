@@ -6,8 +6,6 @@ import { createRoot } from 'react-dom/client';
 import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridReadyEvent } from 'ag-grid-community';
 import { ColGroupDef, GetDataPath, GridApi, GridOptions, ModuleRegistry } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { RowGroupingModule } from 'ag-grid-enterprise';
 import { AgGridReact } from 'ag-grid-react';
 

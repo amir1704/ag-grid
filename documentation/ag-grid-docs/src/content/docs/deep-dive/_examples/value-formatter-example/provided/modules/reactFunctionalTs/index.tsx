@@ -6,9 +6,7 @@ import { ClientSideRowModelModule } from 'ag-grid-community';
 // Theme
 import type { ColDef, ValueFormatterParams } from 'ag-grid-community';
 import { ModuleRegistry } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
 // Core CSS
-import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { AgGridReact } from 'ag-grid-react';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);

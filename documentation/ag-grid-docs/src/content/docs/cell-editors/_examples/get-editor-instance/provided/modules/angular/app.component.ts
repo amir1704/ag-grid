@@ -5,8 +5,6 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { ClientSideRowModelModule } from 'ag-grid-community';
 import type { ColDef, GridReadyEvent } from 'ag-grid-community';
 import { ModuleRegistry } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 import { MySimpleEditor } from './mySimple-editor.component';
 import './style.css';

@@ -30,7 +30,6 @@ export class Environment extends BeanStub implements NamedBean {
 
     public wireBeans(beans: BeanCollection): void {
         this.eGridDiv = beans.eGridDiv;
-        beans.eGridDiv.dataset.name = 'eGridDiv';
     }
 
     private sizeEls = new Map<Variable, HTMLElement>();
@@ -189,25 +188,29 @@ export class Environment extends BeanStub implements NamedBean {
     }
 
     private handleThemeGridOptionChange(): void {
-        const { gos } = this;
+        const { gos, gridTheme: oldGridTheme, themeClass: oldThemeClass } = this;
         const themeGridOption = gos.get('theme');
         let newGridTheme: GridTheme | undefined;
+        let newThemeClass: string | undefined;
         if (typeof themeGridOption === 'string') {
             newGridTheme = undefined;
-            this.themeClass = themeGridOption;
+            newThemeClass = themeGridOption;
         } else {
             newGridTheme = themeGridOption || themeQuartz;
-            this.themeClass = newGridTheme?.getCssClass();
+            newThemeClass = newGridTheme?.getCssClass();
         }
-        if (newGridTheme !== this.gridTheme) {
-            this.gridTheme?.stopUse();
+        if (newGridTheme !== oldGridTheme) {
+            oldGridTheme?.stopUse();
             this.gridTheme = newGridTheme;
             newGridTheme?.startUse({
                 loadThemeGoogleFonts: gos.get('loadThemeGoogleFonts'),
                 container: this.eGridDiv,
             });
-            this.applyThemeClass(this.eGridDiv);
             this.fireGridStylesChangedEvent('themeChanged');
+        }
+        if (newThemeClass !== oldThemeClass) {
+            this.themeClass = newThemeClass;
+            this.applyThemeClass(this.eGridDiv);
         }
         if (newGridTheme && getComputedStyle(document.body).getPropertyValue('--ag-legacy-styles-loaded')) {
             if (themeGridOption) {

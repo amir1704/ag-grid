@@ -2,8 +2,6 @@ import { createApp, onBeforeMount, ref, shallowRef } from 'vue';
 
 import { ClientSideRowModelModule } from 'ag-grid-community';
 import { ModuleRegistry } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { ExcelExportModule } from 'ag-grid-enterprise';
 import { MenuModule } from 'ag-grid-enterprise';
 import { AgGridVue } from 'ag-grid-vue3';

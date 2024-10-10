@@ -2,8 +2,6 @@ import { createApp } from 'vue';
 
 import { ClientSideRowModelModule } from 'ag-grid-community';
 import { ModuleRegistry } from 'ag-grid-community';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { AgGridVue } from 'ag-grid-vue3';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
