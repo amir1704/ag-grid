@@ -425,9 +425,6 @@ export {
     ServerSideTransactionResult,
     ServerSideTransactionResultStatus,
 } from './interfaces/serverSideTransaction';
-export { LoadCompleteEvent, LoadSuccessParams } from './rowNodeCache/iRowNodeBlock';
-export { RowNodeBlock } from './rowNodeCache/rowNodeBlock';
-export { RowNodeBlockLoader } from './rowNodeCache/rowNodeBlockLoader';
 export {
     IClientSideRowModel,
     ClientSideRowModelSteps,
@@ -446,6 +443,7 @@ export {
 export {
     IServerSideRowModel,
     IServerSideTransactionManager,
+    LoadSuccessParams,
     RefreshServerSideParams,
 } from './interfaces/iServerSideRowModel';
 export { IServerSideStore, StoreRefreshAfterParams, ServerSideGroupLevelState } from './interfaces/IServerSideStore';
@@ -596,6 +594,7 @@ export type { FocusService } from './focusService';
 export type { GridOptionsService } from './gridOptionsService';
 export { PropertyChangedEvent } from './gridOptionsService';
 export {
+    _getMaxConcurrentDatasourceRequests,
     _getRowIdCallback,
     _getRowHeightForNode,
     _isDomLayout,
@@ -976,7 +975,6 @@ export {
 } from './filter/filterModule';
 export { EditCoreModule } from './edit/editModule';
 export { StickyRowModule } from './rendering/features/stickyRowModule';
-export { RowNodeBlockModule } from './rowNodeCache/rowNodeBlockModule';
 export { RowSelectionCoreModule } from './selection/rowSelectionModule';
 export {
     CsrmSsrmSharedApiModule as _CsrmSsrmSharedApiModule,

@@ -26,7 +26,7 @@ export const MasterDetailCoreModule: _ModuleWithoutApi = {
         { name: 'agDetailCellRenderer', classImp: DetailCellRenderer },
     ],
     dynamicBeans: [
-        { name: 'detailCellRenderer', classImp: DetailCellRendererCtrl },
+        { name: 'detailCellRendererCtrl', classImp: DetailCellRendererCtrl },
         { name: 'groupCellRendererCtrl', classImp: GroupCellRendererCtrl },
     ],
     dependsOn: [EnterpriseCoreModule],

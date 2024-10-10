@@ -311,10 +311,10 @@ export class LazyStore extends BeanStub implements IServerSideStore {
      *
      * For the purpose of exclusively server side filtered stores, this is the same as getNodes().forEachDeepAfterFilterAndSort
      */
-    forEachStoreDeep(callback: (store: IServerSideStore, index: number) => void, sequence = { value: 0 }): void {
+    forEachStoreDeep(callback: (store: LazyStore, index: number) => void, sequence = { value: 0 }): void {
         callback(this, sequence.value++);
         this.cache.getNodes().forEach((lazyNode) => {
-            const childCache = lazyNode.node.childStore;
+            const childCache = lazyNode.node.childStore as LazyStore | undefined;
             if (childCache) {
                 childCache.forEachStoreDeep(callback, sequence);
             }
@@ -329,7 +329,7 @@ export class LazyStore extends BeanStub implements IServerSideStore {
     forEachNodeDeep(callback: (rowNode: RowNode<any>, index: number) => void, sequence = { value: 0 }): void {
         this.cache.getNodes().forEach((lazyNode) => {
             callback(lazyNode.node, sequence.value++);
-            const childCache = lazyNode.node.childStore;
+            const childCache = lazyNode.node.childStore as LazyStore | undefined;
             if (childCache) {
                 childCache.forEachNodeDeep(callback, sequence);
             }
@@ -356,7 +356,7 @@ export class LazyStore extends BeanStub implements IServerSideStore {
         for (const key in orderedNodes) {
             const lazyNode = orderedNodes[key];
             callback(lazyNode.node, sequence.value++);
-            const childCache = lazyNode.node.childStore;
+            const childCache = lazyNode.node.childStore as LazyStore | undefined;
             if (childCache) {
                 childCache.forEachNodeDeepAfterFilterAndSort(callback, sequence, includeFooterNodes);
             }
@@ -531,7 +531,7 @@ export class LazyStore extends BeanStub implements IServerSideStore {
      * @param keys the grouping path to the desired store
      * @returns the child store for the given keys, or null if not found
      */
-    getChildStore(keys: string[]): IServerSideStore | null {
+    getChildStore(keys: string[]): LazyStore | null {
         return this.storeUtils.getChildStore(keys, this, (key: string) => {
             const lazyNode = this.cache.getNodes().find((lazyNode) => lazyNode.node.key == key);
             if (!lazyNode) {
@@ -546,10 +546,10 @@ export class LazyStore extends BeanStub implements IServerSideStore {
      *
      * @param cb the callback to execute
      */
-    private forEachChildStoreShallow(cb: (store: IServerSideStore) => void) {
+    private forEachChildStoreShallow(cb: (store: LazyStore) => void) {
         this.cache.getNodes().forEach(({ node }) => {
             if (node.childStore) {
-                cb(node.childStore);
+                cb(node.childStore as LazyStore);
             }
         });
     }
@@ -671,7 +671,6 @@ export class LazyStore extends BeanStub implements IServerSideStore {
      */
     addStoreStates(result: ServerSideGroupLevelState[]) {
         result.push({
-            suppressInfiniteScroll: false,
             route: this.parentRowNode.getRoute() ?? [],
             rowCount: this.getRowCount(),
             lastRowIndexKnown: this.isLastRowIndexKnown(),

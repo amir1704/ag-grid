@@ -1,6 +1,7 @@
 import { BeanStub } from '../context/beanStub';
 import type { BeanCollection } from '../context/context';
 import type { AgColumn } from '../entities/agColumn';
+import type { IsRowSelectable } from '../entities/gridOptions';
 import type { RowNode } from '../entities/rowNode';
 import type { SelectionEventSourceType } from '../events';
 import {
@@ -10,7 +11,6 @@ import {
     _getEnableSelectionWithoutKeys,
     _getGroupSelectsDescendants,
     _getIsRowSelectable,
-    _getRowSelectionMode,
     _isClientSideRowModel,
     _isRowSelection,
 } from '../gridOptionsUtils';
@@ -28,13 +28,23 @@ export abstract class BaseSelectionService extends BeanStub {
     protected rowModel: IRowModel;
     private ariaAnnouncementService: AriaAnnouncementService;
 
+    private isRowSelectable?: IsRowSelectable;
+
     public wireBeans(beans: BeanCollection) {
         this.rowModel = beans.rowModel;
         this.ariaAnnouncementService = beans.ariaAnnouncementService;
     }
 
     public postConstruct(): void {
-        this.addManagedPropertyListener('isRowSelectable', () => this.updateSelectable(false));
+        this.addManagedPropertyListeners(['isRowSelectable', 'rowSelection'], () => {
+            const callback = _getIsRowSelectable(this.gos);
+            if (callback !== this.isRowSelectable) {
+                this.isRowSelectable = callback;
+                this.updateSelectable(false);
+            }
+        });
+
+        this.isRowSelectable = _getIsRowSelectable(this.gos);
     }
 
     public createCheckboxSelectionComponent(): CheckboxSelectionComponent {
@@ -165,10 +175,7 @@ export abstract class BaseSelectionService extends BeanStub {
     public updateSelectable(skipLeafNodes: boolean) {
         const { gos } = this;
 
-        const isRowSelecting = _getRowSelectionMode(gos) !== undefined;
-        const isRowSelectable = _getIsRowSelectable(gos);
-
-        if (!isRowSelecting || !isRowSelectable) {
+        if (!_isRowSelection(gos)) {
             return;
         }
 
@@ -189,7 +196,7 @@ export abstract class BaseSelectionService extends BeanStub {
                 return;
             }
 
-            const rowSelectable = isRowSelectable?.(node) ?? true;
+            const rowSelectable = this.isRowSelectable?.(node) ?? true;
             node.setRowSelectable(rowSelectable, true);
 
             if (!rowSelectable && node.isSelected()) {

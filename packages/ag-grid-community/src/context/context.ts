@@ -43,6 +43,7 @@ import type { PinnedWidthService } from '../gridBodyComp/pinnedWidthService';
 import type { ScrollVisibleService } from '../gridBodyComp/scrollVisibleService';
 import type { GridDestroyService } from '../gridDestroyService';
 import type { GridOptionsService } from '../gridOptionsService';
+import type { RowNodeBlockLoader } from '../infiniteRowModel/rowNodeBlockLoader';
 import type { IChartService } from '../interfaces/IChartService';
 import type { IRangeService } from '../interfaces/IRangeService';
 import type { IAdvancedFilterService } from '../interfaces/iAdvancedFilterService';
@@ -90,7 +91,6 @@ import type { StickyRowService } from '../rendering/features/stickyRowService';
 import type { OverlayService } from '../rendering/overlays/overlayService';
 import type { RowContainerHeightService } from '../rendering/rowContainerHeightService';
 import type { RowRenderer } from '../rendering/rowRenderer';
-import type { RowNodeBlockLoader } from '../rowNodeCache/rowNodeBlockLoader';
 import type { RowNodeSorter } from '../sort/rowNodeSorter';
 import type { SortController } from '../sort/sortController';
 import type { CellStyleService } from '../styling/cellStyleService';
@@ -112,7 +112,7 @@ export interface ContextParams extends GenericContextParams<BeanName, BeanCollec
 export interface SingletonBean extends GenericSingletonBean<BeanName, BeanCollection> {}
 
 export type DynamicBeanName =
-    | 'detailCellRenderer'
+    | 'detailCellRendererCtrl'
     | 'fillHandle'
     | 'groupCellRendererCtrl'
     | 'headerFilterCellCtrl'

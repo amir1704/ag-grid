@@ -660,7 +660,7 @@ export class DragAndDropService extends BeanStub implements NamedBean {
         this.dragAndDropImageParent = targetEl;
 
         if (!targetEl) {
-            _logWarn(54, {});
+            _logWarn(54);
         } else {
             targetEl.appendChild(eGui);
         }

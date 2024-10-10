@@ -5,10 +5,10 @@ import type { FocusService } from '../focusService';
 import type { IDatasource } from '../interfaces/iDatasource';
 import type { SortModelItem } from '../interfaces/iSortModelItem';
 import type { RowRenderer } from '../rendering/rowRenderer';
-import type { RowNodeBlockLoader } from '../rowNodeCache/rowNodeBlockLoader';
 import { _log } from '../utils/function';
 import { _exists } from '../utils/generic';
 import { InfiniteBlock } from './infiniteBlock';
+import type { RowNodeBlockLoader } from './rowNodeBlockLoader';
 
 export interface InfiniteCacheParams {
     datasource: IDatasource;

@@ -1,7 +1,7 @@
 import type { NamedBean } from '../../context/bean';
 import { BeanStub } from '../../context/beanStub';
 import type { DynamicBeanMeta, DynamicBeanName, UserComponentName } from '../../context/context';
-import type { ModuleName } from '../../interfaces/iModule';
+import type { Module, ModuleName } from '../../interfaces/iModule';
 import { TooltipComponent } from '../../rendering/tooltipComponent';
 import { _logWarn } from '../../validation/logging';
 import type { AgComponentSelector, ComponentSelector } from '../../widgets/component';
@@ -45,7 +45,17 @@ export class Registry extends BeanStub implements NamedBean {
         }
     }
 
-    public registerUserComponent(name: UserComponentName, component: any, params?: any) {
+    public registerModule(module: Module): void {
+        module.userComponents?.forEach(({ name, classImp, params }) =>
+            this.registerUserComponent(name, classImp, params)
+        );
+
+        module.dynamicBeans?.forEach((meta) => this.registerDynamicBean(meta));
+
+        module.selectors?.forEach((selector) => this.registerSelector(selector));
+    }
+
+    private registerUserComponent(name: UserComponentName, component: any, params?: any) {
         this.agGridDefaults[name] = component;
         if (params) {
             this.agGridDefaultParams[name] = params;
@@ -103,7 +113,7 @@ export class Registry extends BeanStub implements NamedBean {
         return null;
     }
 
-    public registerDynamicBean(meta: DynamicBeanMeta): void {
+    private registerDynamicBean(meta: DynamicBeanMeta): void {
         this.dynamicBeans[meta.name] = meta.classImp;
     }
 
@@ -117,7 +127,7 @@ export class Registry extends BeanStub implements NamedBean {
         return new BeanClass(...args) as any;
     }
 
-    public registerSelector(selector: ComponentSelector): void {
+    private registerSelector(selector: ComponentSelector): void {
         this.selectors[selector.selector] = selector;
     }
 

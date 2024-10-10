@@ -138,6 +138,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
         this.addManagedPropertyListener('suppressCellFocus', (e) => this.onSuppressCellFocusChanged(e.currentValue));
         this.addManagedPropertyListeners(
             [
+                'groupSuppressBlankHeader',
                 'getBusinessKeyForNode',
 
                 'fullWidthCellRenderer',
@@ -218,13 +219,13 @@ export class RowRenderer extends BeanStub implements NamedBean {
     }
 
     private onCellFocusChanged(event?: CellFocusedEvent) {
-        this.forEveryCellCtrl((cellCtrl) => cellCtrl.onCellFocused(event));
-        this.forEveryFullWidthRowCtrl((rowCtrl) => rowCtrl.onFullWidthRowFocused(event));
+        this.someCellCtrls((cellCtrl) => cellCtrl.onCellFocused(event));
+        this.someFullWidthRowCtrls((rowCtrl) => rowCtrl.onFullWidthRowFocused(event));
     }
 
     private onSuppressCellFocusChanged(suppressCellFocus: boolean): void {
-        this.forEveryCellCtrl((cellCtrl) => cellCtrl.onSuppressCellFocusChanged(suppressCellFocus));
-        this.forEveryFullWidthRowCtrl((rowCtrl) => rowCtrl.onSuppressCellFocusChanged(suppressCellFocus));
+        this.someCellCtrls((cellCtrl) => cellCtrl.onSuppressCellFocusChanged(suppressCellFocus));
+        this.someFullWidthRowCtrls((rowCtrl) => rowCtrl.onSuppressCellFocusChanged(suppressCellFocus));
     }
 
     // in a clean design, each cell would register for each of these events. however when scrolling, all the cells
@@ -239,14 +240,14 @@ export class RowRenderer extends BeanStub implements NamedBean {
             flashCells: (event) => {
                 const { flashCellService } = this.beans;
                 if (flashCellService) {
-                    this.forEveryCellCtrl((cellCtrl) => flashCellService.onFlashCells(cellCtrl, event));
+                    this.someCellCtrls((cellCtrl) => flashCellService.onFlashCells(cellCtrl, event));
                 }
             },
             columnHoverChanged: () => {
-                this.forEveryCellCtrl((cellCtrl) => cellCtrl.onColumnHover());
+                this.someCellCtrls((cellCtrl) => cellCtrl.onColumnHover());
             },
             displayedColumnsChanged: () => {
-                this.forEveryCellCtrl((cellCtrl) => cellCtrl.onDisplayedColumnsChanged());
+                this.someCellCtrls((cellCtrl) => cellCtrl.onDisplayedColumnsChanged());
             },
             displayedColumnsWidthChanged: () => {
                 // only for printLayout - because we are rendering all the cells in the same row, regardless of pinned state,
@@ -255,7 +256,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
                 // all the center cols need to be shifted to accommodate this. when in normal layout, the pinned cols are
                 // in different containers so doesn't impact.
                 if (this.printLayout) {
-                    this.forEveryCellCtrl((cellCtrl) => cellCtrl.onLeftChanged());
+                    this.someCellCtrls((cellCtrl) => cellCtrl.onLeftChanged());
                 }
             },
         });
@@ -274,11 +275,11 @@ export class RowRenderer extends BeanStub implements NamedBean {
 
     private setupRangeSelectionListeners = () => {
         const onCellSelectionChanged = () => {
-            this.forEveryCellCtrl((cellCtrl) => cellCtrl.onCellSelectionChanged());
+            this.someCellCtrls((cellCtrl) => cellCtrl.onCellSelectionChanged());
         };
 
         const onColumnMovedPinnedVisible = () => {
-            this.forEveryCellCtrl((cellCtrl) => cellCtrl.updateRangeBordersIfRangeCount());
+            this.someCellCtrls((cellCtrl) => cellCtrl.updateRangeBordersIfRangeCount());
         };
 
         const addCellSelectionListeners = () => {
@@ -326,7 +327,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
 
         cols.forEach((col) => {
             const forEachCellWithThisCol = (callback: (cellCtrl: CellCtrl) => void) => {
-                this.forEveryCellCtrl((cellCtrl) => {
+                this.someCellCtrls((cellCtrl) => {
                     if (cellCtrl.getColumn() === col) {
                         callback(cellCtrl);
                     }
@@ -408,7 +409,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
     public getAllCellsForColumn(column: AgColumn): HTMLElement[] {
         const res: HTMLElement[] = [];
 
-        this.forEveryRowCtrl((rowCtrl) => {
+        this.someRowCtrls((rowCtrl) => {
             const eCell = rowCtrl.getCellElement(column);
             if (eCell) {
                 res.push(eCell);
@@ -706,13 +707,13 @@ export class RowRenderer extends BeanStub implements NamedBean {
         });
     }
 
-    /** @return true if func returned true (exited early) */
-    public forEveryCellCtrl(func: CtrlFunc<CellCtrl>): boolean {
-        return this.forEveryRowCtrl((rowCtrl) => rowCtrl.forEveryCellCtrl(func));
+    /** equivalent of `array.some()` for all cell ctrls */
+    public someCellCtrls(func: CtrlFunc<CellCtrl>): boolean {
+        return this.someRowCtrls((rowCtrl) => rowCtrl.someCellCtrls(func));
     }
 
-    /** @return true if func returned true (exited early) */
-    public forEveryRowCtrl(func: CtrlFunc<RowCtrl>): boolean {
+    /** equivalent of `array.some()` for all row ctrls */
+    public someRowCtrls(func: CtrlFunc<RowCtrl>): boolean {
         if (
             iterateCtrls(this.topRowCtrls, func) ||
             iterateCtrls(this.bottomRowCtrls, func) ||
@@ -722,8 +723,9 @@ export class RowRenderer extends BeanStub implements NamedBean {
             return true;
         }
 
-        for (const key in Object.keys(this.rowCtrlsByRowIndex)) {
-            if (func(this.rowCtrlsByRowIndex[key])) {
+        // note that as keys are numbers, this iterates in order of row index key
+        for (const value of Object.values(this.rowCtrlsByRowIndex)) {
+            if (func(value)) {
                 return true;
             }
         }
@@ -747,9 +749,9 @@ export class RowRenderer extends BeanStub implements NamedBean {
             newData: false,
             suppressFlash: params.suppressFlash,
         };
-        this.forMatchingCellCtrls(params.rowNodes, params.columns as AgColumn[], (cellCtrl) => {
-            cellCtrl.refreshOrDestroyCell(refreshCellParams);
-        });
+        this.someMatchingCellCtrls(params.rowNodes, params.columns as AgColumn[], (cellCtrl) =>
+            cellCtrl.refreshOrDestroyCell(refreshCellParams)
+        );
 
         // refresh the full width rows too
         this.refreshFullWidth(params.rowNodes);
@@ -766,7 +768,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
             cellFocused = this.getCellToRestoreFocusToAfterRefresh() || null;
         }
 
-        this.forMatchingRowCtrls(rowNodes, (rowCtrl) => {
+        this.someMatchingRowCtrls(rowNodes, (rowCtrl) => {
             if (!rowCtrl.isFullWidth()) {
                 return;
             }
@@ -784,14 +786,14 @@ export class RowRenderer extends BeanStub implements NamedBean {
         }
     }
 
-    /** @return true if func returned true (exited early) */
-    public forMatchingRowCtrls(rowNodes: IRowNode[] | null | undefined, func: CtrlFunc<RowCtrl>): boolean {
+    /** equivalent of `array.some()` for all row ctrls that match the provided row nodes */
+    public someMatchingRowCtrls(rowNodes: IRowNode[] | null | undefined, func: CtrlFunc<RowCtrl>): boolean {
         const rowIdsMap = mapRowNodes(rowNodes);
         if (!rowNodes || !rowIdsMap) {
-            return this.forEveryRowCtrl(func);
+            return this.someRowCtrls(func);
         }
 
-        return this.forEveryRowCtrl((rowCtrl) => {
+        return this.someRowCtrls((rowCtrl) => {
             const rowNode = rowCtrl.getRowNode();
             if (isRowInMap(rowNode, rowIdsMap)) {
                 if (func(rowCtrl)) {
@@ -801,8 +803,8 @@ export class RowRenderer extends BeanStub implements NamedBean {
         });
     }
 
-    /** @return true if func returned true (exited early) */
-    public forMatchingCellCtrls(
+    /** equivalent of `array.some()` for cell ctrls that match the provided row nodes and columns */
+    public someMatchingCellCtrls(
         rowNodes: IRowNode[] | null | undefined,
         columns: (string | AgColumn)[] | undefined,
         func: CtrlFunc<CellCtrl>
@@ -818,8 +820,8 @@ export class RowRenderer extends BeanStub implements NamedBean {
             });
         }
 
-        return this.forMatchingRowCtrls(rowNodes, (rowCtrl) =>
-            rowCtrl.forEveryCellCtrl((cellCtrl) => {
+        return this.someMatchingRowCtrls(rowNodes, (rowCtrl) =>
+            rowCtrl.someCellCtrls((cellCtrl) => {
                 const colId: string = cellCtrl.getColumn().getId();
                 const excludeColFromRefresh = colIdsMap && !colIdsMap[colId];
 
@@ -1077,7 +1079,7 @@ export class RowRenderer extends BeanStub implements NamedBean {
         // embedded, as what appears in each section depends on whether we are pinned or not
         const rowsToRemove: string[] = [];
 
-        this.forEveryFullWidthRowCtrl((fullWidthCtrl) => {
+        this.someFullWidthRowCtrls((fullWidthCtrl) => {
             const rowIndex = fullWidthCtrl.getRowNode().rowIndex;
             rowsToRemove.push(rowIndex!.toString());
         });
@@ -1087,9 +1089,9 @@ export class RowRenderer extends BeanStub implements NamedBean {
         this.redraw({ afterScroll: true });
     }
 
-    /** @return true if func returned true (exited early) */
-    private forEveryFullWidthRowCtrl(func: CtrlFunc<RowCtrl>): boolean {
-        return this.forEveryRowCtrl((rowCtrl: RowCtrl) => {
+    /** equivalent of `array.some()` for all full width row ctrls */
+    private someFullWidthRowCtrls(func: CtrlFunc<RowCtrl>): boolean {
+        return this.someRowCtrls((rowCtrl: RowCtrl) => {
             // include just full width
             if (!rowCtrl.isFullWidth()) {
                 return;

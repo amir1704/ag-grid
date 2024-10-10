@@ -138,9 +138,7 @@ export class EditService extends BeanStub implements NamedBean {
     }
 
     public stopAllEditing(cancel: boolean = false): void {
-        this.rowRenderer.forEveryRowCtrl((rowCtrl) => {
-            rowCtrl.stopEditing(cancel);
-        });
+        this.rowRenderer.someRowCtrls((rowCtrl) => rowCtrl.stopEditing(cancel));
     }
 
     public addStopEditingWhenGridLosesFocus(viewports: HTMLElement[]): void {
@@ -181,17 +179,7 @@ export class EditService extends BeanStub implements NamedBean {
     }
 
     public setInlineEditingCss(rowCtrl: RowCtrl): void {
-        const isCellEditing = () => {
-            let isCellEditing = false;
-            rowCtrl.forEveryCellCtrl((cellCtrl) => {
-                if (cellCtrl.isEditing()) {
-                    isCellEditing = true;
-                    return true;
-                }
-            });
-            return isCellEditing;
-        };
-        const editing = rowCtrl.isEditing() || isCellEditing();
+        const editing = rowCtrl.isEditing() || rowCtrl.someCellCtrls((cellCtrl) => cellCtrl.isEditing());
         rowCtrl.forEachGui(undefined, (gui) => {
             gui.rowComp.addOrRemoveCssClass('ag-row-inline-editing', editing);
             gui.rowComp.addOrRemoveCssClass('ag-row-not-inline-editing', !editing);

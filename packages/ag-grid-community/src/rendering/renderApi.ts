@@ -30,7 +30,7 @@ export function flashCells<TData = any>(beans: BeanCollection, params: FlashCell
         return;
     }
     beans.frameworkOverrides.wrapIncoming(() => {
-        beans.rowRenderer.forMatchingCellCtrls(params.rowNodes, params.columns as AgColumn[], (cellCtrl) =>
+        beans.rowRenderer.someMatchingCellCtrls(params.rowNodes, params.columns as AgColumn[], (cellCtrl) =>
             flashCellService.flashCell(cellCtrl, params)
         );
     });
@@ -62,20 +62,20 @@ export function getCellRendererInstances<TData = any>(
     params: GetCellRendererInstancesParams<TData> = {}
 ): ICellRenderer[] {
     const cellRenderers: ICellRenderer[] = [];
-    beans.rowRenderer.forMatchingCellCtrls(params.rowNodes, params.columns as AgColumn[], (cellCtrl) => {
-        const renderer = cellCtrl.getCellRenderer();
-        if (renderer != null) {
-            cellRenderers.push(renderer);
+    beans.rowRenderer.someMatchingCellCtrls(params.rowNodes, params.columns as AgColumn[], (cellCtrl) => {
+        const cellRenderer = cellCtrl.getCellRenderer();
+        if (cellRenderer != null) {
+            cellRenderers.push(_unwrapUserComp(cellRenderer));
         }
     });
     if (params.columns?.length) {
-        return cellRenderers.map(_unwrapUserComp);
+        return cellRenderers;
     }
 
     const fullWidthRenderers: ICellRenderer[] = [];
     const rowIdMap = mapRowNodes(params.rowNodes);
 
-    beans.rowRenderer.forEveryRowCtrl((rowCtrl) => {
+    beans.rowRenderer.someRowCtrls((rowCtrl) => {
         if (rowIdMap && !isRowInMap(rowCtrl.getRowNode(), rowIdMap)) {
             return;
         }
@@ -88,10 +88,10 @@ export function getCellRendererInstances<TData = any>(
         for (let i = 0; i < renderers.length; i++) {
             const renderer = renderers[i];
             if (renderer != null) {
-                fullWidthRenderers.push(renderer);
+                fullWidthRenderers.push(_unwrapUserComp(renderer));
             }
         }
     });
 
-    return [...fullWidthRenderers, ...cellRenderers].map(_unwrapUserComp);
+    return [...fullWidthRenderers, ...cellRenderers];
 }
