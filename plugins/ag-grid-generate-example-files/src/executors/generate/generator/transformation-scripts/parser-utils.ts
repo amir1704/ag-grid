@@ -530,11 +530,6 @@ export function addBindingImports(
     });
 }
 
-export const usesThemingApi = (bindings: ParsedBindings) => {
-    // bindings.imports.some((b) => b.module.includes('ag-grid-community/theming')); Update
-    return bindings.properties.some((p) => p.name === 'theme') || bindings.exampleName.includes('theming-');
-};
-
 /** Add imports such as "import { colors } from './colors.js';"
  * Does not include the imports for framework component
  */

@@ -22,7 +22,6 @@ import {
     isInstanceMethod,
     preferParamsApi,
     replaceGridReadyRowData,
-    usesThemingApi,
 } from './parser-utils';
 import { getImport, toConst, toInput, toOutput, toRef } from './vue-utils';
 
@@ -252,23 +251,12 @@ function getModuleImports(
     componentFileNames: string[],
     allStylesheets: string[]
 ): string[] {
-    const { inlineGridStyles, imports: bindingImports } = bindings;
-
     const imports = [
         "import { createApp, onBeforeMount, ref, shallowRef } from 'vue';",
         "import { AgGridVue } from 'ag-grid-vue3';",
     ];
 
     addLicenseManager(imports, exampleConfig);
-
-    if (!usesThemingApi(bindings)) {
-        imports.push("import 'ag-grid-community/styles/ag-grid.css';");
-        // to account for the (rare) example that has more than one class...just default to quartz if it does
-        // we strip off any '-dark' from the theme when loading the CSS as dark versions are now embedded in the
-        // "source" non dark version
-        const theme = inlineGridStyles.theme ? inlineGridStyles.theme.replace('-dark', '') : 'ag-theme-quartz';
-        imports.push(`import "ag-grid-community/styles/${theme}.css";`);
-    }
 
     if (allStylesheets && allStylesheets.length > 0) {
         allStylesheets.forEach((styleSheet) => imports.push(`import './${path.basename(styleSheet)}';`));

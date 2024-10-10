@@ -612,7 +612,7 @@ export class DragAndDropService extends BeanStub implements NamedBean {
         eGui.style.setProperty('z-index', '9999');
 
         mouseEventService.stampTopLevelGridCompWithGridInstance(eGui);
-        environment.applyThemeClasses(eGui);
+        environment.applyThemeClass(eGui);
         dragAndDropImageComponent.setIcon(null);
 
         let { dragItemName } = dragSource;

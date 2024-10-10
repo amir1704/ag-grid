@@ -188,7 +188,7 @@ export class AdvancedFilterCtrl extends BeanStub<AdvancedFilterCtrlEvent> implem
             const eAdvancedFilterComp = this.createBean(new AdvancedFilterComp());
             const eAdvancedFilterCompGui = eAdvancedFilterComp.getGui();
 
-            this.environment.applyThemeClasses(eAdvancedFilterCompGui);
+            this.environment.applyThemeClass(eAdvancedFilterCompGui);
 
             eAdvancedFilterCompGui.classList.add(this.gos.get('enableRtl') ? 'ag-rtl' : 'ag-ltr');
 

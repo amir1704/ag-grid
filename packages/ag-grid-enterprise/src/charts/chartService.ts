@@ -284,7 +284,7 @@ export class ChartService extends BeanStub implements NamedBean, IChartService {
         if (chartContainer) {
             // if container exists, means developer initiated chart create via API, so place in provided container
             chartContainer.appendChild(chartComp.getGui());
-            this.environment.applyThemeClasses(chartContainer);
+            this.environment.applyThemeClass(chartContainer);
         } else if (createChartContainerFunc) {
             // otherwise, user created chart via grid UI, check if developer provides containers (e.g. if the application
             // is using its own dialogs rather than the grid provided dialogs)

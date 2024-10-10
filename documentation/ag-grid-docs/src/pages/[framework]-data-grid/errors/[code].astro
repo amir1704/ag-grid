@@ -92,7 +92,7 @@ const headings = errorPage
                 {Content ? <Content framework={framework} /> : undefined}
 
                 <h2 id={fullErrorTextHeading.slug}>{fullErrorTextHeading.text}</h2>
-                <pre id="errorCodeText">{defaultErrorText}</pre>
+                <pre id="errorCodeText" style="white-space: pre-wrap;">{defaultErrorText}</pre>
                 <Note>To show this error text in the dev console, import the <code>ValidationModule</code>.</Note>
             </div>
         </div>

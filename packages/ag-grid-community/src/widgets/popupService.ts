@@ -493,7 +493,7 @@ export class PopupService extends BeanStub implements NamedBean {
         // add env CSS class to child, in case user provided a popup parent, which means
         // theme class may be missing
         const eWrapper = document.createElement('div');
-        this.environment.applyThemeClasses(eWrapper);
+        this.environment.applyThemeClass(eWrapper);
 
         eWrapper.classList.add('ag-popup');
         element.classList.add(this.gos.get('enableRtl') ? 'ag-rtl' : 'ag-ltr', 'ag-popup-child');
@@ -519,7 +519,7 @@ export class PopupService extends BeanStub implements NamedBean {
     private handleThemeChange(e: CssVariablesChanged) {
         if (e.themeChanged) {
             for (const popup of this.popupList) {
-                this.environment.applyThemeClasses(popup.wrapper);
+                this.environment.applyThemeClass(popup.wrapper);
             }
         }
     }
