@@ -2,10 +2,6 @@ const quickStartReact = `
 **1. Import the React Data Grid**
 
 \`\`\`js
-// Mandatory CSS required by the Data Grid
-import "ag-grid-community/styles/ag-grid.css"; 
-// Optional Theme applied to the Data Grid
-import "ag-grid-community/styles/ag-theme-quartz.css"; 
 // React Data Grid Component
 import { AgGridReact } from 'ag-grid-react'; 
 \`\`\`
@@ -58,10 +54,6 @@ const quickStartReactModule = `
 Import the required modules, and register them via the ModuleRegistry.
 
 \`\`\`js
-// Mandatory CSS required by the Data Grid
-import "@ag-grid-community/styles/ag-grid.css"; 
-// Optional Theme applied to the Data Grid
-import "@ag-grid-community/styles/ag-theme-quartz.css"; 
 // React Data Grid Component & Module Registry
 import { AgGridReact } from '@ag-grid-community/react'; 
 // Default Row Model & Module Registry
@@ -163,30 +155,9 @@ template:
 <!-- The AG Grid component -->
 <ag-grid-angular
   [rowData]="rowData"
-  [columnDefs]="colDefs" />
+  [columnDefs]="colDefs"
+  style="height: 500px;" />
 \`
-\`\`\`
-
-**4. Styling the Data Grid**
-
-Import the required dependencies into your styles.css file.
-
-\`\`\`js
-/* Core Data Grid CSS */
-import 'ag-grid-community/styles/ag-grid.css';
-
-/* Quartz Theme Specific CSS */
-import 'ag-grid-community/styles/ag-theme-quartz.css';
-\`\`\`
-
-Add the class and style props to the ag-grid-angular component.
-
-\`\`\`js
-<ag-grid-angular
-class="ag-theme-quartz"
-style="height: 500px;"
-...
-/>
 \`\`\`
 `;
 
@@ -246,30 +217,9 @@ template:
 <!-- The AG Grid component -->
 <ag-grid-angular
   [rowData]="rowData"
-  [columnDefs]="colDefs" />
+  [columnDefs]="colDefs"
+  style="height: 500px;" />
 \`
-\`\`\`
-
-**4. Styling the Data Grid**
-
-Import the required dependencies into your styles.css file.
-
-\`\`\`js
-/* Core Data Grid CSS */
-import '~@ag-grid-community/styles/ag-grid.css';
-
-/* Quartz Theme Specific CSS */
-import '~@ag-grid-community/styles/ag-theme-quartz.css';
-\`\`\`
-
-Add the class and style props to the ag-grid-angular component.
-
-\`\`\`js
-<ag-grid-angular
-class="ag-theme-quartz"
-style="height: 500px;"
-...
-/>
 \`\`\`
 `;
 
@@ -281,8 +231,6 @@ const quickStartVue3 = `
 
 <script>
 import { ref } from 'vue';
-import "ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
-import "ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the Data Grid
 import { AgGridVue } from "ag-grid-vue3"; // Vue Data Grid Component
 
 export default {
@@ -349,8 +297,6 @@ Import the required modules, and register them via the ModuleRegistry.
 
 <script>
 import { ref } from 'vue';
-import "@ag-grid-community/styles/ag-grid.css"; // Mandatory CSS required by the Data Grid
-import "@ag-grid-community/styles/ag-theme-quartz.css"; // Optional Theme applied to the Data Grid
 import { AgGridVue } from "@ag-grid-community/vue3"; // Vue Data Grid Component
 
 // Default Row Model & Module Registry
