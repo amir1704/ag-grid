@@ -14,7 +14,6 @@ const VueExample = {
             <div style="height: 100%" class="inner-col" v-on:dragover="gridDragOver($event)" v-on:drop="gridDrop($event, 'left')">
                 <ag-grid-vue
                     style="height: 100%; width: 100%;"
-                    :class="themeClass"
                     ref="leftGrid"
                     :gridOptions="leftGridOptions"
                     :columnDefs="leftColumnDefs"
@@ -44,7 +43,6 @@ const VueExample = {
             <div style="height: 100%" class="inner-col" v-on:dragover="gridDragOver($event)" v-on:drop="gridDrop($event, 'right')">
                 <ag-grid-vue
                     style="height: 100%; width: 100%"
-                    :class="themeClass"
                     ref="rightGrid"
                     :gridOptions="rightGridOptions"
                     :columnDefs ="rightColumnDefs"
@@ -70,9 +68,6 @@ const VueExample = {
             leftRowData: null,
             rightRowData: null,
             rowIdSequence: 100,
-            themeClass:
-                /** DARK MODE START **/ document.documentElement.dataset.defaultTheme ||
-                'ag-theme-quartz' /** DARK MODE END **/,
         };
     },
     beforeMount() {

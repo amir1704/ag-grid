@@ -43,7 +43,6 @@ const VueExample = {
                 <div style="height: 100%;" class="inner-col" ref="eLeftGrid">
                     <ag-grid-vue
                         style="height: 100%;"
-                        :class="themeClass"
                         :defaultColDef="defaultColDef"
                         :getRowId="getRowId"
                         :rowClassRules="rowClassRules"
@@ -78,7 +77,6 @@ const VueExample = {
                 <div style="height: 100%;" class="inner-col" ref="eRightGrid">
                     <ag-grid-vue
                         style="height: 100%;"
-                        :class="themeClass"
                         :defaultColDef="defaultColDef"
                         :getRowId="getRowId"
                         :rowClassRules="rowClassRules"
@@ -113,9 +111,6 @@ const VueExample = {
                 filter: true,
             },
             columns: [{ field: 'id', rowDrag: true }, { field: 'color' }, { field: 'value1' }, { field: 'value2' }],
-            themeClass:
-                /** DARK MODE START **/ document.documentElement.dataset.defaultTheme ||
-                'ag-theme-quartz' /** DARK MODE END **/,
         };
     },
     beforeMount() {

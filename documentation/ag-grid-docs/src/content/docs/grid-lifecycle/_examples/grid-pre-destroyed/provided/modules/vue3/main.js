@@ -34,7 +34,6 @@ const VueExample = {
                 <ag-grid-vue
                     v-if="showGrid"                
                     style="width: 100%; height: 100%;"
-                    :class="themeClass"
                     :columnDefs="columnDefs"
                     @grid-ready="onGridReady"
                     :defaultColDef="defaultColDef"
@@ -147,9 +146,6 @@ const VueExample = {
             updateColumnWidth,
             destroyGrid,
             reloadGrid,
-            themeClass:
-                /** DARK MODE START **/ document.documentElement.dataset.defaultTheme ||
-                'ag-theme-quartz' /** DARK MODE END **/,
         };
     },
 };

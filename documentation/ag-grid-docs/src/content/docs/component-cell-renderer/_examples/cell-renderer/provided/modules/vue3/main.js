@@ -70,7 +70,6 @@ const VueExample = {
             </div>
             <ag-grid-vue
                     style="width: 100%; height: 100%;"
-                    :class="themeClass"
                     :components="components"
                     :columnDefs="columnDefs"
                     :rowData="rowData"
@@ -100,9 +99,7 @@ const VueExample = {
                 filter: true,
             },
             rowData: null,
-            themeClass:
-                /** DARK MODE START **/ document.documentElement.dataset.defaultTheme ||
-                'ag-theme-quartz' /** DARK MODE END **/,
+
             frostPrefix: false,
         };
     },
