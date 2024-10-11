@@ -250,8 +250,8 @@ export class FuncColsService extends BeanStub implements NamedBean {
         columnCallback: (added: boolean, column: AgColumn) => void,
         source: ColumnEventType
     ): void {
-        const gridColumns = this.columnModel.getCols();
-        if (!gridColumns?.length) {
+        // defer grid init until cols are present. array size does not matter, only presence.
+        if (!this.columnModel.getCols()) {
             return;
         }
 
