@@ -6,7 +6,6 @@ import {
     addGenericInterfaceImport,
     addLicenseManager,
     findLocaleImport,
-    getActiveTheme,
     getIntegratedDarkModeCode,
     getPropertyInterfaces,
     handleRowGenericInterface,

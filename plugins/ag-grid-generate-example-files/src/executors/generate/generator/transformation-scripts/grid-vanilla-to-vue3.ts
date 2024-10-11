@@ -16,7 +16,6 @@ import {
     addRelativeImports,
     convertFunctionToConstProperty,
     findLocaleImport,
-    getActiveTheme,
     getFunctionName,
     getIntegratedDarkModeCode,
     isInstanceMethod,
@@ -369,7 +368,6 @@ const VueExample = {
             gridApi,
             ${propertyNames.length > 0 ? propertyNames.join(',\n') + ',' : ''}
             onGridReady,
-            themeClass: ${getActiveTheme(bindings.inlineGridStyles.theme, false)},
             ${functionNames ? functionNames.filter((functionName) => !propertyNames.includes(functionName)).join(',\n') : ''}
         }        
     }

@@ -8,7 +8,6 @@ import {
     addLicenseManager,
     convertFunctionToConstPropertyTs,
     findLocaleImport,
-    getActiveTheme,
     getFunctionName,
     getIntegratedDarkModeCode,
     getPropertyInterfaces,
@@ -91,9 +90,8 @@ function getTemplate(
     rowDataGeneric: string,
     exampleConfig: ExampleConfig
 ): string {
-    const { inlineGridStyles } = bindings;
     const agGridTag = `
-        <div ${exampleConfig.myGridReference ? 'id="myGrid"' : ''} style={gridStyle} className={${getActiveTheme(inlineGridStyles.theme, true)}}>
+        <div ${exampleConfig.myGridReference ? 'id="myGrid"' : ''} style={gridStyle}>
             <AgGridReact${rowDataGeneric}
                 ref={gridRef}
                 ${componentAttributes.join('\n')}

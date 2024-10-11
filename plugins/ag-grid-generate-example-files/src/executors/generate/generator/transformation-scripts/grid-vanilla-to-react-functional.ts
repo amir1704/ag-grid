@@ -8,7 +8,6 @@ import {
     addRelativeImports,
     convertFunctionToConstProperty,
     findLocaleImport,
-    getActiveTheme,
     getFunctionName,
     getIntegratedDarkModeCode,
     isInstanceMethod,
@@ -77,7 +76,7 @@ function getImports(
 
 function getTemplate(bindings: ParsedBindings, componentAttributes: string[], exampleConfig: ExampleConfig): string {
     const agGridTag = `
-        <div ${exampleConfig.myGridReference ? 'id="myGrid"' : ''} style={gridStyle} className={${getActiveTheme(bindings.inlineGridStyles.theme, false)}}>
+        <div ${exampleConfig.myGridReference ? 'id="myGrid"' : ''} style={gridStyle}>
             <AgGridReact
                 ref={gridRef}
                 ${componentAttributes.join('\n')}

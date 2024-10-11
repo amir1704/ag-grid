@@ -653,14 +653,8 @@ export interface IAccount {
     return interfaceStr;
 }
 
-export const DARK_MODE_START = '/** DARK MODE START **/';
-export const DARK_MODE_END = '/** DARK MODE END **/';
 export const DARK_INTEGRATED_START = '/** DARK INTEGRATED START **/';
 export const DARK_INTEGRATED_END = '/** DARK INTEGRATED END **/';
-
-export function getActiveTheme(theme: string, typescript: boolean) {
-    return `${DARK_MODE_START}document.documentElement${typescript ? '?' : ''}.dataset.defaultTheme || '${theme}'${DARK_MODE_END}`;
-}
 
 // TODO detecting "enableCharts" in the example source would do this more reliably
 const chartsExamplePathSubstrings = [
