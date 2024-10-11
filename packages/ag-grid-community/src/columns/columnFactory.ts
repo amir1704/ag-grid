@@ -8,7 +8,7 @@ import { DefaultColumnTypes } from '../entities/defaultColumnTypes';
 import type { ColumnEventType } from '../events';
 import { _isColumnsSortingCoupledToGroup } from '../gridOptionsUtils';
 import { _mergeDeep } from '../utils/object';
-import { _logWarn } from '../validation/logging';
+import { _warn } from '../validation/logging';
 import { ColumnKeyCreator } from './columnKeyCreator';
 import { convertColumnTypes } from './columnUtils';
 import type { DataTypeService } from './dataTypeService';
@@ -500,12 +500,12 @@ export class ColumnFactory extends BeanStub implements NamedBean {
         Object.entries(userTypes).forEach(([key, value]) => {
             if (key in allColumnTypes) {
                 // default column types cannot be overridden
-                _logWarn(34, { key });
+                _warn(34, { key });
             } else {
                 const colType = value as any;
                 if (colType.type) {
                     // type should not be defined in column types
-                    _logWarn(35);
+                    _warn(35);
                 }
 
                 allColumnTypes[key] = value;
@@ -517,7 +517,7 @@ export class ColumnFactory extends BeanStub implements NamedBean {
             if (typeColDef) {
                 _mergeDeep(colDefMerged, typeColDef, false, true);
             } else {
-                _logWarn(36, { t });
+                _warn(36, { t });
             }
         });
     }

@@ -421,11 +421,6 @@ export type { PinnedRowModel } from './pinnedRowModel/pinnedRowModel';
 export { RowNodeTransaction } from './interfaces/rowNodeTransaction';
 export { RowDataTransaction } from './interfaces/rowDataTransaction';
 export {
-    ServerSideTransaction,
-    ServerSideTransactionResult,
-    ServerSideTransactionResultStatus,
-} from './interfaces/serverSideTransaction';
-export {
     IClientSideRowModel,
     ClientSideRowModelSteps,
     ClientSideRowModelStep,
@@ -436,16 +431,21 @@ export { IGroupHideOpenParentsService } from './interfaces/iGroupHideOpenParents
 export { ColumnVO } from './interfaces/iColumnVO';
 
 export {
+    IServerSideRowModel,
+    IServerSideTransactionManager,
+    RefreshServerSideParams,
+    LoadSuccessParams,
+} from './interfaces/iServerSideRowModel';
+export {
     IServerSideDatasource,
     IServerSideGetRowsParams,
     IServerSideGetRowsRequest,
 } from './interfaces/iServerSideDatasource';
 export {
-    IServerSideRowModel,
-    IServerSideTransactionManager,
-    LoadSuccessParams,
-    RefreshServerSideParams,
-} from './interfaces/iServerSideRowModel';
+    ServerSideTransaction,
+    ServerSideTransactionResult,
+    ServerSideTransactionResultStatus,
+} from './interfaces/serverSideTransaction';
 export { IServerSideStore, StoreRefreshAfterParams, ServerSideGroupLevelState } from './interfaces/IServerSideStore';
 
 export { ISideBarService, ISideBar, SideBarDef, ToolPanelDef } from './interfaces/iSideBar';
@@ -933,7 +933,7 @@ export {
 } from './utils/dom';
 export { _stopPropagationForAgGrid, _isStopPropagationForAgGrid, _isElementInEventPath } from './utils/event';
 export { _log, _warnOnce, _errorOnce, _debounce, _doOnce, _waitUntil } from './utils/function';
-export { _logWarn, _logError } from './validation/logging';
+export { _warn as _warn, _error as _error } from './validation/logging';
 export { _createIcon, _createIconNoSpan } from './utils/icon';
 export { _fuzzySuggestions } from './utils/fuzzyMatch';
 export { _exists, _missing, _jsonEquals, _toStringOrNull, _makeNull, _defaultComparator } from './utils/generic';

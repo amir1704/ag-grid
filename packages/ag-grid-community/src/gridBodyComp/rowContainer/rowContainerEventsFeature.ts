@@ -4,11 +4,13 @@ import { BeanStub } from '../../context/beanStub';
 import type { BeanCollection } from '../../context/context';
 import type { AgColumn } from '../../entities/agColumn';
 import type { FocusService } from '../../focusService';
+import { _getSelectAllCurrentPage, _getSelectAllFiltered, _isCellSelectionEnabled } from '../../gridOptionsUtils';
 import type { IRangeService } from '../../interfaces/IRangeService';
 import type { IClipboardService } from '../../interfaces/iClipboardService';
 import type { IContextMenuService } from '../../interfaces/iContextMenu';
 import type { IRowModel } from '../../interfaces/iRowModel';
 import type { RowPinnedType } from '../../interfaces/iRowNode';
+import type { ISelectionService } from '../../interfaces/iSelectionService';
 import type { NavigationService } from '../../navigation/navigationService';
 import type { PinnedRowModel } from '../../pinnedRowModel/pinnedRowModel';
 import type { CellCtrl } from '../../rendering/cell/cellCtrl';
@@ -72,6 +74,7 @@ export class RowContainerEventsFeature extends BeanStub {
     private pinnedRowModel?: PinnedRowModel;
     private rangeService?: IRangeService;
     private clipboardService?: IClipboardService;
+    private selectionService?: ISelectionService;
 
     public wireBeans(beans: BeanCollection) {
         this.mouseEventService = beans.mouseEventService;
@@ -84,6 +87,7 @@ export class RowContainerEventsFeature extends BeanStub {
         this.pinnedRowModel = beans.pinnedRowModel;
         this.rangeService = beans.rangeService;
         this.clipboardService = beans.clipboardService;
+        this.selectionService = beans.selectionService;
     }
 
     private element: HTMLElement;
@@ -296,9 +300,9 @@ export class RowContainerEventsFeature extends BeanStub {
     }
 
     private onCtrlAndA(event: KeyboardEvent): void {
-        const { pinnedRowModel, rowModel, rangeService } = this;
+        const { pinnedRowModel, rowModel, rangeService, selectionService, gos } = this;
 
-        if (rangeService && rowModel.isRowsToRender()) {
+        if (rangeService && _isCellSelectionEnabled(gos) && rowModel.isRowsToRender()) {
             const [isEmptyPinnedTop, isEmptyPinnedBottom] = [
                 pinnedRowModel?.isEmpty('top') ?? true,
                 pinnedRowModel?.isEmpty('bottom') ?? true,
@@ -329,7 +333,16 @@ export class RowContainerEventsFeature extends BeanStub {
                 columnStart: allDisplayedColumns[0],
                 columnEnd: _last(allDisplayedColumns),
             });
+        } else if (selectionService) {
+            const justFiltered = _getSelectAllFiltered(gos);
+            const justCurrentPage = _getSelectAllCurrentPage(gos);
+            selectionService?.selectAllRowNodes({
+                source: 'keyboardSelectAll',
+                justFiltered,
+                justCurrentPage,
+            });
         }
+
         event.preventDefault();
     }
 

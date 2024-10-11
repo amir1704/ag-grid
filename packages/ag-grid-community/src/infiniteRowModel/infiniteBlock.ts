@@ -3,7 +3,7 @@ import { RowNode } from '../entities/rowNode';
 import type { IGetRowsParams } from '../interfaces/iDatasource';
 import type { LoadSuccessParams } from '../interfaces/iServerSideRowModel';
 import { _exists, _missing } from '../utils/generic';
-import { _logWarn } from '../validation/logging';
+import { _warn } from '../validation/logging';
 import type { InfiniteCache, InfiniteCacheParams } from './infiniteCache';
 import { RowNodeBlock } from './rowNodeBlock';
 
@@ -67,7 +67,7 @@ export class InfiniteBlock extends RowNodeBlock {
     protected loadFromDatasource(): void {
         const params = this.createLoadParams();
         if (_missing(this.params.datasource.getRows)) {
-            _logWarn(90);
+            _warn(90);
             return;
         }
 

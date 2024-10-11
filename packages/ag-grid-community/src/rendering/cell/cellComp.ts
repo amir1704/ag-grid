@@ -12,7 +12,7 @@ import { _setAriaRole } from '../../utils/aria';
 import { _addStylesToElement, _clearElement, _removeFromParent } from '../../utils/dom';
 import { _missing } from '../../utils/generic';
 import { _escapeString } from '../../utils/string';
-import { _logWarn } from '../../validation/logging';
+import { _warn } from '../../validation/logging';
 import { Component } from '../../widgets/component';
 import type { TooltipParentComp } from '../../widgets/tooltipStateManager';
 import type { ICellRendererComp } from './../cellRenderers/iCellRenderer';
@@ -441,7 +441,7 @@ export class CellComp extends Component implements TooltipParentComp {
         }
 
         if (!cellEditor.getGui) {
-            _logWarn(97, { colId: this.column.getId() });
+            _warn(97, { colId: this.column.getId() });
             this.beans.context.destroyBean(cellEditor);
             return;
         }
@@ -494,7 +494,7 @@ export class CellComp extends Component implements TooltipParentComp {
     private addPopupCellEditor(params: ICellEditorParams, position?: 'over' | 'under'): void {
         if (this.beans.gos.get('editType') === 'fullRow') {
             //popup cellEditor does not work with fullRowEdit
-            _logWarn(98);
+            _warn(98);
         }
 
         const cellEditor = this.cellEditor!;

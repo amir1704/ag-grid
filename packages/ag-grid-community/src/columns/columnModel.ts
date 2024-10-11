@@ -29,7 +29,7 @@ import type { IPivotResultColsService } from '../interfaces/iPivotResultColsServ
 import type { IShowRowGroupColsService } from '../interfaces/iShowRowGroupColsService';
 import type { ColumnAnimationService } from '../rendering/columnAnimationService';
 import { _areEqual, _moveInArray } from '../utils/array';
-import { _logWarn } from '../validation/logging';
+import { _warn } from '../validation/logging';
 import type { ValueCache } from '../valueService/valueCache';
 import type { ColumnDefFactory } from './columnDefFactory';
 import { dispatchColumnPinnedEvent } from './columnEventUtils';
@@ -457,7 +457,7 @@ export class ColumnModel extends BeanStub implements NamedBean {
         }
 
         if (_isDomLayout(this.gos, 'print')) {
-            _logWarn(37);
+            _warn(37);
             return;
         }
 
@@ -674,7 +674,7 @@ export class ColumnModel extends BeanStub implements NamedBean {
         newOrder = placeLockedColumns(newOrder, this.gos);
 
         if (!doesMovePassMarryChildren(newOrder, this.getColTree())) {
-            _logWarn(39);
+            _warn(39);
             return;
         }
 

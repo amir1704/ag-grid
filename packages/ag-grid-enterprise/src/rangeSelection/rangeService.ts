@@ -37,9 +37,9 @@ import {
     _isSameRow,
     _isUsingNewCellSelectionAPI,
     _last,
-    _logWarn,
     _makeNull,
     _missing,
+    _warn,
     _warnOnce,
 } from 'ag-grid-community';
 
@@ -499,7 +499,7 @@ export class RangeService extends BeanStub implements NamedBean, IRangeService {
     private verifyCellRanges(gos: GridOptionsService): boolean {
         const invalid = _isUsingNewCellSelectionAPI(gos) && _getSuppressMultiRanges(gos) && this.cellRanges.length > 0;
         if (invalid) {
-            _logWarn(93);
+            _warn(93);
         }
 
         return !invalid;

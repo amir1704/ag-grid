@@ -16,13 +16,7 @@ import type {
     ValueService,
     WithoutGridCommon,
 } from 'ag-grid-community';
-import {
-    BeanStub,
-    ClientSideRowModelSteps,
-    _getGrandTotalRow,
-    _getGroupAggFiltering,
-    _logError,
-} from 'ag-grid-community';
+import { BeanStub, ClientSideRowModelSteps, _error, _getGrandTotalRow, _getGroupAggFiltering } from 'ag-grid-community';
 
 import type { AggFuncService } from './aggFuncService';
 
@@ -305,7 +299,7 @@ export class AggregationStage extends BeanStub implements NamedBean, IRowNodeSta
             typeof aggFuncOrString === 'string' ? this.aggFuncService.getAggFunc(aggFuncOrString) : aggFuncOrString;
 
         if (typeof aggFunc !== 'function') {
-            _logError(109, { aggFuncOrString });
+            _error(109, { aggFuncOrString });
             return null;
         }
 
