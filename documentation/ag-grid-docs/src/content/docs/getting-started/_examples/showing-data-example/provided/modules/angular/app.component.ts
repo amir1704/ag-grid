@@ -27,12 +27,7 @@ export class CustomButtonComponent implements ICellRendererAngularComp {
     selector: 'my-app',
     standalone: true,
     imports: [AgGridAngular],
-    template: ` <ag-grid-angular
-        style="width: 100%; height: 100%;"
-        [rowData]="rowData"
-        [columnDefs]="columnDefs"
-        [class]="themeClass"
-    />`,
+    template: ` <ag-grid-angular style="width: 100%; height: 100%;" [rowData]="rowData" [columnDefs]="columnDefs" />`,
 })
 export class AppComponent {
     public rowData: any[] | null = [
@@ -53,9 +48,6 @@ export class AppComponent {
         { field: 'electric', flex: 1 },
         { field: 'button', cellRenderer: CustomButtonComponent, flex: 1 },
     ];
-    public themeClass =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz' /** DARK MODE END **/;
 }
 
 const gridDiv = document.querySelector<HTMLElement>('#myGrid')!;

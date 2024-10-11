@@ -48,7 +48,6 @@ interface ColumnWidth {
             @if (isVisible) {
                 <ag-grid-angular
                     style="width: 100%; height: 100%;"
-                    [class]="themeClass"
                     [columnDefs]="columnDefs"
                     [defaultColDef]="defaultColDef"
                     [rowData]="rowData"
@@ -60,9 +59,6 @@ interface ColumnWidth {
     `,
 })
 export class AppComponent {
-    public themeClass =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz' /** DARK MODE END **/;
     public isVisible = true;
     public showPreDestroyState = false;
     private gridApi: GridApi | undefined;

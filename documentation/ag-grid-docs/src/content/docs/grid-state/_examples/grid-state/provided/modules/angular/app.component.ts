@@ -49,7 +49,6 @@ ModuleRegistry.registerModules([
             @if (gridVisible) {
                 <ag-grid-angular
                     style="width: 100%; height: 100%;"
-                    [class]="themeClass"
                     [columnDefs]="columnDefs"
                     [defaultColDef]="defaultColDef"
                     [sideBar]="true"
@@ -67,9 +66,6 @@ ModuleRegistry.registerModules([
     `,
 })
 export class AppComponent {
-    themeClass =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz' /** DARK MODE END **/;
     private gridApi!: GridApi<IOlympicData>;
 
     public columnDefs: ColDef[] = [

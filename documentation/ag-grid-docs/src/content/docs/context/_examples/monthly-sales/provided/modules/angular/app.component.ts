@@ -61,7 +61,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule, RowGroupingModule, Set
             [autoGroupColumnDef]="autoGroupColumnDef"
             [rowSelection]="rowSelection"
             [rowData]="rowData"
-            [class]="themeClass"
             (gridReady)="onGridReady($event)"
         />
     </div>`,
@@ -156,9 +155,6 @@ export class AppComponent {
         groupSelects: 'descendants',
     };
     public rowData!: any[];
-    public themeClass: string =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz'; /** DARK MODE END **/
 
     constructor(private http: HttpClient) {}
 

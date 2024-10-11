@@ -83,7 +83,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule, MenuModule, ExcelExpor
         <div class="grid-wrapper">
             <ag-grid-angular
                 style="width: 100%; height: 100%;"
-                [class]="themeClass"
                 [columnDefs]="columnDefs"
                 [defaultColDef]="defaultColDef"
                 [popupParent]="popupParent"
@@ -94,9 +93,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule, MenuModule, ExcelExpor
     </div>`,
 })
 export class AppComponent {
-    themeClass =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz' /** DARK MODE END **/;
     public columnDefs: ColDef[] = [
         { field: 'athlete', minWidth: 200 },
         { field: 'country', minWidth: 200 },

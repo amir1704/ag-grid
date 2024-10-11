@@ -44,7 +44,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
                 <div style="height: 100%;" class="inner-col" #eLeftGrid>
                     <ag-grid-angular
                         style="height: 100%;"
-                        [class]="themeClass"
                         [defaultColDef]="defaultColDef"
                         [getRowId]="getRowId"
                         [rowClassRules]="rowClassRules"
@@ -93,7 +92,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
                 <div style="height: 100%;" class="inner-col" #eRightGrid>
                     <ag-grid-angular
                         style="height: 100%;"
-                        [class]="themeClass"
                         [defaultColDef]="defaultColDef"
                         [getRowId]="getRowId"
                         [rowClassRules]="rowClassRules"
@@ -109,10 +107,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
     `,
 })
 export class AppComponent {
-    themeClass =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz' /** DARK MODE END **/;
-
     leftRowData: any[] = [];
     rightRowData: any[] = [];
     leftApi!: GridApi;

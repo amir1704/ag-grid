@@ -635,64 +635,65 @@ This example demonstrates filtering, editing, sorting, row selection, and pagina
 
 ### Themes
 
-[Grid Themes](./themes/) define how the grid looks (colors, font, spacing etc).
-The grid comes with [Provided Themes](./themes/#provided-themes) such as Quartz and Alpine.
-To use a theme you need to 1) import the themes CSS and 2) apply the theme to the parent
-HTML element of the grid.
+[Grid Themes](./theming-api/) define how the grid looks (colors, font, spacing etc). The default theme is Quartz. You can customise Quartz or swap it with a different theme.
+
+
+{% imageCaption imagePath="resources/ag-grid-alpine-quartz-themes.png" alt="AG Grid Themes" maxWidth="860px" /%}
+
+
+From left to right [Alpine Light](/example?theme=ag-theme-alpine), [Alpine Dark](/example?theme=ag-theme-alpine-dark), [Quartz Light](/example?theme=ag-theme-quartz), and [Quartz Dark](/example?theme=ag-theme-quartz-dark) AG Grid themes. 
+
+Once you've chosen a theme you can customise it by setting theme parameters:
+
+```js
+import { themeQuartz }; // or themeBalham, themeMaterial, themeAlpine
+
+const myTheme = themeQuartz.withParams({
+    /* Low spacing = very compact */
+    spacing: 2,
+    /* Changes the color of the grid text */
+    foregroundColor: 'rgb(14, 68, 145)',
+    /* Changes the color of the grid background */
+    backgroundColor: 'rgb(241, 247, 255)',
+    /* Changes the header color of the top row */
+    headerBackgroundColor: 'rgb(228, 237, 250)',
+    /* Changes the hover color of the row*/
+    rowHoverColor: 'rgb(216, 226, 255)',
+});
 
 {% if isFramework("react") %}
-```jsx
-import "ag-grid-community/styles/ag-theme-quartz.css"; // import Quartz theme
-// import "ag-grid-community/styles/ag-theme-alpine.css"; // import Alpine theme, not used here
 ...
 return (
- <div class="ag-theme-quartz"> // set Quartz Theme on parent div
-   <AgGridReact rowData={...} columnDefs={...} />
+ <div>
+   <AgGridReact theme={myTheme} rowData={...} columnDefs={...} />
  </div>
 )
-```
 {% /if %}
-
 {% if isFramework("javascript") %}
-```js
-import "ag-grid-community/styles/ag-theme-quartz.css"; // import Quartz theme
-// import "ag-grid-community/styles/ag-theme-alpine.css"; // import Alpine theme, not used here
-```
-
-```html
-<!-- Your grid container -->
-<div id="myGrid" class="ag-theme-quartz" style="height: 500px"></div>
-```
+const gridOptions = {
+  theme: myTheme,
+  ...
+}
 {% /if %}
-
 {% if isFramework("angular") %}
-```js
-import "ag-grid-community/styles/ag-theme-quartz.css"; // import Quartz theme
-// import "ag-grid-community/styles/ag-theme-alpine.css"; // import Alpine theme, not used here
 // ...
  template: `<div style="height: 100%; box-sizing: border-box;">
    <ag-grid-angular
      // ...
-     [class]="themeClass"
+     [theme]="theme"
     />
  </div>`,
 // ...
-public themeClass: string = "ag-theme-quartz";
-```
+public theme = myTheme;
 {% /if %}
-
 {% if isFramework("vue") %}
-```js
-import "ag-grid-community/styles/ag-theme-quartz.css"; // import Quartz theme
-// import "ag-grid-community/styles/ag-theme-alpine.css"; // import Alpine theme, not used here
-
 const VueExample = {
  template: `
        <div style="height: 100%">
            <div style="height: 100%; box-sizing: border-box;">
                <ag-grid-vue
                // ...
-               :class="themeClass"></ag-grid-vue>
+               :theme="theme"></ag-grid-vue>
            </div>
        </div>
    `,
@@ -700,37 +701,15 @@ const VueExample = {
  data: function () {
    return {
      // ...
-     themeClass: "ag-theme-quartz",
+     theme: myTheme,
    };
  },
 // ...
-```
-
 {% /if %}
-
-{% imageCaption imagePath="resources/ag-grid-alpine-quartz-themes.png" alt="AG Grid Themes" maxWidth="860px" /%}
-
-
-From left to right [Alpine Light](/example?theme=ag-theme-alpine), [Alpine Dark](/example?theme=ag-theme-alpine-dark), [Quartz Light](/example?theme=ag-theme-quartz), and [Quartz Dark](/example?theme=ag-theme-quartz-dark) AG Grid themes. 
-
-### Customising a Theme
-
-[Customise Themes](./global-style-customisation) using CSS variables.
-
-```css
-.ag-theme-quartz {
-    /* Changes the color of the grid text */
-      --ag-foreground-color: rgb(14, 68, 145);
-      /* Changes the color of the grid background */
-      --ag-background-color: rgb(241, 247, 255);
-      /* Changes the header color of the top row */
-      --ag-header-background-color: rgb(228, 237, 250);
-      /* Changes the hover color of the row*/
-      --ag-row-hover-color: rgb(216, 226, 255);
-}
 ```
 
-{% gridExampleRunner title="Theming Example" name="custom-quartz-theme" /%}
+
+{% gridExampleRunner title="Customising Quartz Theme" name="custom-quartz-theme" suppressDarkMode=true /%}
 
 ### Figma
 
@@ -786,7 +765,7 @@ const gridOptions = {
 
 This example demonstrates cell style and row style.
 
-{% gridExampleRunner title="Theming Example" name="theme-example" /%}
+{% gridExampleRunner title="Cell and Row Style" name="cell-row-style" /%}
 
 ## Next Steps
 

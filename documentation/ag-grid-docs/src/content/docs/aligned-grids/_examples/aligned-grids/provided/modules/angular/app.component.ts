@@ -23,7 +23,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
         <ag-grid-angular
             style="width: 100%; height: 45%"
             #topGrid
-            [class]="themeClass"
             [rowData]="rowData"
             [gridOptions]="topOptions"
             [alignedGrids]="[bottomGrid]"
@@ -35,7 +34,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
         <ag-grid-angular
             style="width: 100%; height: 45%"
             #bottomGrid
-            [class]="themeClass"
             [rowData]="rowData"
             [gridOptions]="bottomOptions"
             [alignedGrids]="[topGrid]"
@@ -44,9 +42,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
     `,
 })
 export class AppComponent {
-    themeClass =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz' /** DARK MODE END **/;
     columnDefs!: (ColDef | ColGroupDef)[];
     defaultColDef: ColDef = {
         filter: true,

@@ -22,7 +22,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule, MenuModule]);
         <div class="example-wrapper">
             <div class="inner-col">
                 <ag-grid-angular
-                    [class]="themeClass"
                     [defaultColDef]="defaultColDef"
                     [rowData]="leftRowData"
                     [modules]="leftModules"
@@ -32,7 +31,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule, MenuModule]);
 
             <div class="inner-col">
                 <ag-grid-angular
-                    [class]="themeClass"
                     [defaultColDef]="defaultColDef"
                     [rowData]="leftRowData"
                     [modules]="rightModules"
@@ -43,9 +41,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule, MenuModule]);
     `,
 })
 export class AppComponent {
-    themeClass =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz' /** DARK MODE END **/;
     leftModules = [SetFilterModule, ClipboardModule];
     rightModules = [ExcelExportModule];
     leftRowData: any[] = [];

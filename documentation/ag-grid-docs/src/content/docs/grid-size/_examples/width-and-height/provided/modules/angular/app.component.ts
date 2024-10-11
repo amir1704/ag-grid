@@ -26,7 +26,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
                 <ag-grid-angular
                     style="width: 100%; height:100%;"
                     #agGrid
-                    [class]="themeClass"
                     [rowData]="rowData"
                     [columnDefs]="columnDefs"
                 />
@@ -35,10 +34,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
     `,
 })
 export class AppComponent implements OnInit {
-    themeClass =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz' /** DARK MODE END **/;
-
     @ViewChild('agGrid') agGrid!: AgGridAngular<IOlympicData>;
 
     public style: any = {

@@ -22,20 +22,11 @@ interface IRow {
     template: `
         <div class="content">
             <!-- The AG Grid component, with Dimensions, CSS Theme, Row Data, and Column Definition -->
-            <ag-grid-angular
-                style="width: 100%; height: 350px;"
-                [class]="themeClass"
-                [rowData]="rowData"
-                [columnDefs]="colDefs"
-            />
+            <ag-grid-angular style="width: 100%; height: 350px;" [rowData]="rowData" [columnDefs]="colDefs" />
         </div>
     `,
 })
 export class AppComponent {
-    themeClass =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz' /** DARK MODE END **/;
-
     // Row Data: The data to be displayed.
     rowData: IRow[] = [
         { make: 'Tesla', model: 'Model Y', price: 64950, electric: true },

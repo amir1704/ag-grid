@@ -21,8 +21,6 @@ export class GridComp extends TabGuardComp {
 
     private eGridDiv: HTMLElement;
 
-    private themeClass: string | undefined;
-
     constructor(eGridDiv: HTMLElement) {
         super();
         this.eGridDiv = eGridDiv;

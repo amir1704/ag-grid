@@ -23,7 +23,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
         </div>
         <ag-grid-angular
             style="width: 100%; height: 100%;"
-            [class]="themeClass"
             [columnDefs]="columnDefs"
             [rowData]="rowData"
             [quickFilterText]="quickFilterText"
@@ -32,9 +31,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
     </div>`,
 })
 export class AppComponent implements OnInit {
-    public themeClass =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz' /** DARK MODE END **/;
     public displayedRows: number = 10;
     public quickFilterText: string = '';
 

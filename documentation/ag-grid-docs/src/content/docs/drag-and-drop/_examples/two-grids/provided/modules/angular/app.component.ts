@@ -23,7 +23,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
             >
                 <ag-grid-angular
                     style="height: 100%"
-                    [class]="themeClass"
                     [gridOptions]="leftGridOptions"
                     [columnDefs]="columnDefs"
                     (gridReady)="onGridReady($event, 'left')"
@@ -58,7 +57,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
             >
                 <ag-grid-angular
                     style="height: 100%"
-                    [class]="themeClass"
                     [gridOptions]="rightGridOptions"
                     [columnDefs]="columnDefs"
                     (gridReady)="onGridReady($event, 'right')"
@@ -69,10 +67,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
     `,
 })
 export class AppComponent {
-    themeClass =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz' /** DARK MODE END **/;
-
     private leftGridApi!: GridApi<IOlympicData>;
     private rightGridApi!: GridApi<IOlympicData>;
 

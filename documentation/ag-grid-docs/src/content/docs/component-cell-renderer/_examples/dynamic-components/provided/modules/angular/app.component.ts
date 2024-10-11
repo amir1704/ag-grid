@@ -26,7 +26,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
             #agGrid
             style="width: 100%; height: 100%;"
             id="myGrid"
-            [class]="themeClass"
             [columnDefs]="columnDefs"
             [rowData]="rowData"
             [context]="context"
@@ -36,9 +35,6 @@ ModuleRegistry.registerModules([ClientSideRowModelModule]);
     </div>`,
 })
 export class AppComponent {
-    themeClass =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz' /** DARK MODE END **/;
     private gridApi!: GridApi;
 
     public columnDefs: ColDef[] = [
