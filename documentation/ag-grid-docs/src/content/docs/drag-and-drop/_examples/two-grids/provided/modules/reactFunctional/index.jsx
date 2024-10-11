@@ -155,11 +155,7 @@ const GridExample = () => {
         <div className="outer">
             <div
                 style={{ height: '100%' }}
-                className={
-                    'inner-col ' +
-                    /** DARK MODE START **/ (document.documentElement.dataset.defaultTheme ||
-                        'ag-theme-quartz') /** DARK MODE END **/
-                }
+                className="inner-col"
                 onDragOver={gridDragOver}
                 onDrop={(e) => gridDrop('left', e)}
             >
@@ -195,11 +191,7 @@ const GridExample = () => {
 
             <div
                 style={{ height: '100%' }}
-                className={
-                    'inner-col ' +
-                    /** DARK MODE START **/ (document.documentElement.dataset.defaultTheme ||
-                        'ag-theme-quartz') /** DARK MODE END **/
-                }
+                className="inner-col"
                 onDragOver={gridDragOver}
                 onDrop={(e) => gridDrop('right', e)}
             >

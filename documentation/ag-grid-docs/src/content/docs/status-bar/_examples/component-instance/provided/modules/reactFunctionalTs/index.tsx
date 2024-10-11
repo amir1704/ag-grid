@@ -96,13 +96,7 @@ const GridExample = () => {
                 Toggle Status Bar Component
             </button>
 
-            <div
-                style={gridStyle}
-                className={
-                    /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-                    'ag-theme-quartz' /** DARK MODE END **/
-                }
-            >
+            <div style={gridStyle}>
                 <AgGridReact
                     ref={gridRef}
                     rowData={rowData}

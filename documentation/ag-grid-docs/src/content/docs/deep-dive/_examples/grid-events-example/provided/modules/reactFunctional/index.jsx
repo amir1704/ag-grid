@@ -75,13 +75,7 @@ const GridExample = () => {
 
     // Container: Defines the grid's theme & dimensions.
     return (
-        <div
-            className={
-                /** DARK MODE START **/ document.documentElement.dataset.defaultTheme ||
-                'ag-theme-quartz' /** DARK MODE END **/
-            }
-            style={{ width: '100%', height: '100%' }}
-        >
+        <div style={{ width: '100%', height: '100%' }}>
             <AgGridReact
                 rowData={rowData}
                 columnDefs={colDefs}

@@ -190,13 +190,7 @@ const GridExample = () => {
     );
 
     return (
-        <div
-            className={
-                'example-wrapper ' +
-                /** DARK MODE START **/ (document.documentElement.dataset.defaultTheme ||
-                    'ag-theme-quartz') /** DARK MODE END **/
-            }
-        >
+        <div className="example-wrapper">
             {getInnerGridCol('Left')}
             <div className="inner-col vertical-toolbar">
                 <span className="bin" ref={eBin}>

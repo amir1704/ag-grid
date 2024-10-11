@@ -73,13 +73,7 @@ const GridExample = () => {
                 </div>
             </div>
 
-            <div
-                style={{ height: '100%' }}
-                className={
-                    /** DARK MODE START **/ document.documentElement.dataset.defaultTheme ||
-                    'ag-theme-quartz' /** DARK MODE END **/
-                }
-            >
+            <div style={{ height: '100%' }}>
                 <AgGridReact
                     loading={loading}
                     rowData={rowData}

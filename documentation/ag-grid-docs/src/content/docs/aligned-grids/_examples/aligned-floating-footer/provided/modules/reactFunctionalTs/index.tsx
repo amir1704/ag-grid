@@ -72,16 +72,8 @@ const GridExample = () => {
             .then((data) => setRowData(data));
     };
 
-    const baseClassName = 'example-container';
-    const themeClassName =
-        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-        'ag-theme-quartz'; /** DARK MODE END **/
-
     return (
-        <div
-            style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
-            className={`${baseClassName} ${themeClassName}`}
-        >
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }} className="example-container">
             <div style={{ flex: '1 1 auto' }}>
                 <AgGridReact
                     ref={topGrid}

@@ -205,13 +205,7 @@ const GridExample = () => {
                     <button onClick={purgeCache}>Purge Cache</button>
                 </div>
                 <div style={{ flexGrow: '1' }}>
-                    <div
-                        style={gridStyle}
-                        className={
-                            /** DARK MODE START **/ document.documentElement.dataset.defaultTheme ||
-                            'ag-theme-quartz' /** DARK MODE END **/
-                        }
-                    >
+                    <div style={gridStyle}>
                         <AgGridReact
                             ref={gridRef}
                             columnDefs={columnDefs}

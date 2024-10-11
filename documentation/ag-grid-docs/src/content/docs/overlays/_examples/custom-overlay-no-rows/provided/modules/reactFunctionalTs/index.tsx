@@ -46,13 +46,7 @@ const GridExample = () => {
                 <button onClick={() => setRowData([{ athlete: 'Michael Phelps', country: 'US' }])}>Set rowData</button>
             </div>
 
-            <div
-                style={{ height: '100%' }}
-                className={
-                    /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-                    'ag-theme-quartz' /** DARK MODE END **/
-                }
-            >
+            <div style={{ height: '100%' }}>
                 <AgGridReact<IAthlete>
                     rowData={rowData}
                     columnDefs={columnDefs}

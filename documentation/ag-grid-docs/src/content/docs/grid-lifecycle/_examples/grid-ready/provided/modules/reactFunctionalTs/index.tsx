@@ -60,13 +60,7 @@ const GridExample = () => {
                     </div>
                 </div>
 
-                <div
-                    style={gridStyle}
-                    className={
-                        /** DARK MODE START **/ document.documentElement?.dataset.defaultTheme ||
-                        'ag-theme-quartz' /** DARK MODE END **/
-                    }
-                >
+                <div style={gridStyle}>
                     <AgGridReact
                         key={gridKey}
                         ref={gridRef}

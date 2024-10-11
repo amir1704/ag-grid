@@ -57,14 +57,7 @@ const GridExample = () => {
                     <input id="toggle-hide-checkbox" type="checkbox" defaultChecked onChange={toggleHideCheckbox} />
                 </label>
             </div>
-            <div
-                id="myGrid"
-                className={
-                    'grid ' +
-                    /** DARK MODE START **/ (document.documentElement.dataset.defaultTheme ||
-                        'ag-theme-quartz') /** DARK MODE END **/
-                }
-            >
+            <div id="myGrid" className="grid">
                 <AgGridReact
                     ref={grid}
                     rowData={rowData}
