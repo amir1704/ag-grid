@@ -57,27 +57,28 @@
 <details>
   <summary><strong>Table of Contents</strong></summary>
 
--   [📖 Overview](#-overview)
-    -   [Features](#features)
-    -   [Examples](#examples)
--   [⚡️ Quick Start](#️-quick-start)
-    -   [Installation](#installation)
-    -   [Setup](#setup)
-    -   [Seed Projects](#seed-projects)
--   [🛠️ Customisations](#️-customisations)
-    -   [Custom Components](#custom-components)
-    -   [Themes](#themes)
-    -   [Custom Themes](#custom-themes)
--   [🌍 Community](#-community)
-    -   [Tools \& Extensions](#tools--extensions)
-    -   [Showcase](#showcase)
-    -   [Stargazers](#stargazers)
--   [🤝 Support](#-support)
-    -   [Enterprise Support](#enterprise-support)
-    -   [Bug Reports](#bug-reports)
-    -   [Questions](#questions)
-    -   [Contributing](#contributing)
--   [⚠️ License](#️-license)
+-   [React Data Grid | React Table](#react-data-grid--react-table)
+    -   [📖 Overview](#-overview)
+        -   [Features](#features)
+        -   [Examples](#examples)
+    -   [⚡️ Quick Start](#️-quick-start)
+        -   [Installation](#installation)
+        -   [Setup](#setup)
+        -   [Seed Projects](#seed-projects)
+    -   [🛠️ Customisations](#️-customisations)
+        -   [Custom Components](#custom-components)
+        -   [Themes](#themes)
+        -   [Custom Themes](#custom-themes)
+    -   [🌍 Community](#-community)
+        -   [Tools \& Extensions](#tools--extensions)
+        -   [Showcase](#showcase)
+        -   [Stargazers](#stargazers)
+    -   [🤝 Support](#-support)
+        -   [Enterprise Support](#enterprise-support)
+        -   [Bug Reports](#bug-reports)
+        -   [Questions](#questions)
+        -   [Contributing](#contributing)
+    -   [⚠️ License](#️-license)
 
 </details>
 
@@ -221,11 +222,8 @@ const GridExample = () => {
 
 ```js
 return (
-    // wrapping container with theme & size
-    <div
-        className="ag-theme-quartz" // applying the Data Grid theme
-        style={{ height: 500 }} // the Data Grid will fill the size of the parent container
-    >
+    // Set a height on the parent div because the grid will fill the available height
+    <div style={{ height: 500 }}>
         <AgGridReact rowData={rowData} columnDefs={colDefs} />
     </div>
 );
@@ -395,19 +393,9 @@ AG Grid has 4 [themes](https://ag-grid.com/react-data-grid/global-style/?utm_sou
     </tr>
 </table>
 
-To apply a theme, add the relevant CSS Class to the Data Grid container. For example, to apply the Quartz theme, use the CSS class `ag-theme-quartz`:
-
-```js
-<div
-    id="myGrid"
-    style="height: 150px; width: 600px"
-    class="ag-theme-quartz"
-></div>
-```
-
 ### Custom Themes
 
-All AG Grid themes can be customised using [CSS variables](https://www.ag-grid.com/react-data-grid/global-style-customisation-variables/?utm_source=ag-grid-react-readme&utm_medium=repository&utm_campaign=github), or you can create a new theme from scratch with the help of our [Theme Builder](https://www.ag-grid.com/theme-builder/?utm_source=ag-grid-react-readme&utm_medium=repository&utm_campaign=github) or [Figma Design System](https://www.figma.com/community/file/1360600846643230092/ag-grid-design-system).
+All AG Grid themes can be customised using the [Theming API](https://www.ag-grid.com/javascript-data-grid/theming/?utm_source=ag-grid-readme&utm_medium=repository&utm_campaign=github), or you can create a new theme from scratch with the help of our [Theme Builder](https://www.ag-grid.com/theme-builder/?utm_source=ag-grid-readme&utm_medium=repository&utm_campaign=github) or [Figma Design System](https://www.figma.com/community/file/1360600846643230092/ag-grid-design-system).
 
 ## 🌍 Community
 

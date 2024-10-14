@@ -403,19 +403,9 @@ AG Grid has 4 [themes](https://ag-grid.com/angular-data-grid/global-style/?utm_s
     </tr>
 </table>
 
-To apply a theme, add the relevant CSS Class to the Data Grid container. For example, to apply the Quartz theme, use the CSS class `ag-theme-quartz`:
-
-```js
-<div
-    id="myGrid"
-    style="height: 150px; width: 600px"
-    class="ag-theme-quartz"
-></div>
-```
-
 ### Custom Themes
 
-All AG Grid themes can be customised using [CSS variables](https://www.ag-grid.com/angular-data-grid/global-style-customisation-variables/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github), or you can create a new theme from scratch with the help of our [Theme Builder](https://www.ag-grid.com/theme-builder/?utm_source=ag-grid-angular-readme&utm_medium=repository&utm_campaign=github) or [Figma Design System](https://www.figma.com/community/file/1360600846643230092/ag-grid-design-system).
+All AG Grid themes can be customised using the [Theming API](https://www.ag-grid.com/javascript-data-grid/theming/?utm_source=ag-grid-readme&utm_medium=repository&utm_campaign=github), or you can create a new theme from scratch with the help of our [Theme Builder](https://www.ag-grid.com/theme-builder/?utm_source=ag-grid-readme&utm_medium=repository&utm_campaign=github) or [Figma Design System](https://www.figma.com/community/file/1360600846643230092/ag-grid-design-system).
 
 ## 🌍 Community
 

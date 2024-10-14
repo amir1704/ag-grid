@@ -34,11 +34,8 @@ const GridExample = () => {
 
 \`\`\`js
 return (
- // wrapping container with theme & size
- <div
-  className="ag-theme-quartz" // applying the Data Grid theme
-  style={{ height: 500 }} // the Data Grid will fill the size of the parent container
- >
+ // set a height on the parent div because the grid fills the available space
+ <div style={{ height: 500 }}>
    <AgGridReact
        rowData={rowData}
        columnDefs={colDefs}
@@ -92,11 +89,8 @@ const GridExample = () => {
 
 \`\`\`js
 return (
- // wrapping container with theme & size
- <div
-  className="ag-theme-quartz" // applying the Data Grid theme
-  style={{ height: 500 }} // the Data Grid will fill the size of the parent container
- >
+ // set a height on the parent div because the grid fills the available space
+ <div style={{ height: 500 }}>
    <AgGridReact
        rowData={rowData}
        columnDefs={colDefs}
@@ -271,7 +265,7 @@ setup() {
 
 **3. Vue Data Grid Component**
 
-Rows and Columns are set as ag-grid-vue component attributes. Styling is applied through the class and style attributes.
+Rows and Columns are set as ag-grid-vue component attributes. Grid height is applied through the style attribute.
 
 \`\`\`js
 <template>
@@ -280,7 +274,6 @@ Rows and Columns are set as ag-grid-vue component attributes. Styling is applied
    :rowData="rowData"
    :columnDefs="colDefs"
    style="height: 500px"
-   class="ag-theme-quartz"
  >
  </ag-grid-vue>
 </template>
@@ -344,7 +337,7 @@ setup() {
 
 **3. Vue Data Grid Component**
 
-Rows and Columns are set as ag-grid-vue component attributes. Styling is applied through the class and style attributes.
+Rows and Columns are set as ag-grid-vue component attributes. Grid height is applied through the style attribute.
 
 \`\`\`js
 <template>
@@ -353,7 +346,6 @@ Rows and Columns are set as ag-grid-vue component attributes. Styling is applied
    :rowData="rowData"
    :columnDefs="colDefs"
    style="height: 500px"
-   class="ag-theme-quartz"
  >
  </ag-grid-vue>
 </template>
