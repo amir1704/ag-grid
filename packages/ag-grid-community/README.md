@@ -57,27 +57,28 @@
 <details>
   <summary><strong>Table of Contents</strong></summary>
 
--   [📖 Overview](#-overview)
-    -   [Features](#features)
-    -   [Examples](#examples)
--   [⚡️ Quick Start](#️-quick-start)
-    -   [Installation](#installation)
-    -   [Setup](#setup)
-    -   [Seed Projects](#seed-projects)
--   [🛠️ Customisations](#️-customisations)
-    -   [Custom Components](#custom-components)
-    -   [Themes](#themes)
-    -   [Custom Themes](#custom-themes)
--   [🌍 Community](#-community)
-    -   [Tools \& Extensions](#tools--extensions)
-    -   [Showcase](#showcase)
-    -   [Stargazers](#stargazers)
--   [🤝 Support](#-support)
-    -   [Enterprise Support](#enterprise-support)
-    -   [Bug Reports](#bug-reports)
-    -   [Questions](#questions)
-    -   [Contributing](#contributing)
--   [⚠️ License](#️-license)
+-   [JavaScript Data Grid | JavaScript Table](#javascript-data-grid--javascript-table)
+    -   [📖 Overview](#-overview)
+        -   [Features](#features)
+        -   [Examples](#examples)
+    -   [⚡️ Quick Start](#️-quick-start)
+        -   [Installation](#installation)
+        -   [Setup](#setup)
+        -   [Seed Projects](#seed-projects)
+    -   [🛠️ Customisations](#️-customisations)
+        -   [Custom Components](#custom-components)
+        -   [Themes](#themes)
+        -   [Custom Themes](#custom-themes)
+    -   [🌍 Community](#-community)
+        -   [Tools \& Extensions](#tools--extensions)
+        -   [Showcase](#showcase)
+        -   [Stargazers](#stargazers)
+    -   [🤝 Support](#-support)
+        -   [Enterprise Support](#enterprise-support)
+        -   [Bug Reports](#bug-reports)
+        -   [Questions](#questions)
+        -   [Contributing](#contributing)
+    -   [⚠️ License](#️-license)
 
 </details>
 
@@ -191,7 +192,7 @@ $ npm install --save ag-grid-community
 
 <!-- Create JavaScript -->
 
-Load the AG Grid library and create a blank container div:
+Load the AG Grid library and create a container div. The div should have a height because the Data Grid will fill the size of the parent container:
 
 ```html
 <html lang="en">
@@ -201,7 +202,7 @@ Load the AG Grid library and create a blank container div:
     </head>
     <body>
         <!-- Your Data Grid container -->
-        <div id="myGrid"></div>
+        <div id="myGrid" style="height: 500px"></div>
     </body>
 </html>
 ```
@@ -231,22 +232,8 @@ const gridOptions = {
         { make: 'Toyota', model: 'Corolla', price: 29600, electric: false },
     ],
     // Column Definitions: Defines the columns to be displayed.
-    columnDefs: [
-        { field: 'make' },
-        { field: 'model' },
-        { field: 'price' },
-        { field: 'electric' },
-    ],
+    columnDefs: [{ field: 'make' }, { field: 'model' }, { field: 'price' }, { field: 'electric' }],
 };
-```
-
-**4. Styling the JavaScript Data Grid**
-
-Add the `ag-theme-quartz` CSS class to your Data Grid container div to apply the Data Grid's theme.
-
-```html
-<!-- Your Data Grid container -->
-<div id="myGrid" class="ag-theme-quartz" style="height: 500px"></div>
 ```
 
 <!-- END SETUP -->
