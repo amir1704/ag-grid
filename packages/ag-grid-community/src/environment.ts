@@ -192,12 +192,15 @@ export class Environment extends BeanStub implements NamedBean {
         const themeGridOption = gos.get('theme');
         let newGridTheme: GridTheme | undefined;
         let newThemeClass: string | undefined;
-        if (typeof themeGridOption === 'string') {
+        if (themeGridOption === 'legacy') {
             newGridTheme = undefined;
             newThemeClass = themeGridOption;
         } else {
             newGridTheme = themeGridOption || themeQuartz;
-            newThemeClass = newGridTheme?.getCssClass();
+            if (!newGridTheme.getCssClass) {
+                _error(146, { theme: newGridTheme });
+            }
+            newThemeClass = newGridTheme.getCssClass();
         }
         if (newGridTheme !== oldGridTheme) {
             oldGridTheme?.stopUse();
@@ -212,6 +215,8 @@ export class Environment extends BeanStub implements NamedBean {
             this.themeClass = newThemeClass;
             this.applyThemeClass(this.eGridDiv);
         }
+        // --ag-legacy-styles-loaded is defined by the Sass themes which
+        // shouldn't be used at the same time as Theming API
         if (newGridTheme && getComputedStyle(document.body).getPropertyValue('--ag-legacy-styles-loaded')) {
             if (themeGridOption) {
                 _error(106);
