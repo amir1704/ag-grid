@@ -106,7 +106,6 @@
                             "type": "item",
                             "title": "Customisation",
                             "children": [
-                                TODO refactor this
                                 {
                                     "type": "item",
                                     "title": "Colors & Dark Mode",
