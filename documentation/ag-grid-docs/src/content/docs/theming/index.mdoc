@@ -1,13 +1,13 @@
 ---
-title: "Theming API"
+title: "Theming"
 ---
 
-Control the look and feel of the grid
+Theming refers to the process of adjusting design elements such as colours, borders and spacing to match your applications' design.
 
-The Theming API is a new JavaScript API for styling the grid. In the future it will become the primary way to style the grid. You can choose from our built-in themes, mix and match elements of different themes, and create themes visually using the [Theme Builder](/theme-builder).
+The grid is styled using CSS. It ships with built-in styles that can create a range of designs. You can then use CSS to create more advanced customisations.
 
 {% note %}
-Before v32.2 themes were applied by importing our CSS files and setting a class on the wrapper element e.g. `ag-theme-quartz`. The Theming API is an alternative to this technique, and the two cannot be combined on the same page. For more information see [Migrating to Theming API](./theming-migration/).
+Before v33, themes were applied by importing our CSS files and setting a class on the wrapper element e.g. `ag-theme-quartz`. The Theming API is an alternative to this technique, and the two cannot be combined on the same page. For more information see [Migrating to Theming API](./theming-migration/). The old technique is still supported, see [v32 Themes](./themes-v32/) for more information.
 {% /note %}
 
 ## Key Concepts: Themes, Parts and Parameters
@@ -209,3 +209,7 @@ The following parts are available:
     * `tabStyleMaterial` - tabs styled as per the Material theme
     * `tabStyleAlpine` - tabs styled as per the Alpine theme
     * `tabStyleRolodex` - tabs designed to imitate paper cards, as used by the Balham theme
+
+## Programmatically changing row and cell appearance
+
+Separately from theming, the grid supports using code to customise the appearance of individual columns, headers or cells by using [row styles](./row-styles/), [cell styles](./cell-styles/) or [custom renderers](./components/). Unlike theming, these methods allow you to change the appearance of elements depending on the data that they contain.

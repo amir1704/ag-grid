@@ -315,7 +315,7 @@ export const AG_GRID_ERRORS = {
     143: () => '' as const,
     144: () => '' as const,
     145: () =>
-        'Invalid mixing of Theming API and CSS File Themes in the same page. No value was provided to the `theme` grid option so it defaulted to themeQuartz, but the file (ag-grid.css) is also included and will cause styling issues. Either pass your theme name to the `theme` grid option to use CSS File Themes, or remove ag-grid.css from the page.' as const,
+        'Invalid mixing of Theming API and CSS File Themes in the same page. No value was provided to the `theme` grid option so it defaulted to themeQuartz, but the file (ag-grid.css) is also included and will cause styling issues. Pass the string "legacy" to the theme grid option to use v32 style themes, or remove ag-grid.css from the page.' as const,
     146: ({ theme }: { theme: any }) =>
         `theme grid option must be a Theming API theme object or the string "legacy", received: ${theme}` as const,
 

@@ -95,18 +95,28 @@
                         {
                             "type": "item",
                             "title": "Overview",
-                            "path": "global-style"
+                            "path": "theming"
                         },
                         {
                             "type": "item",
-                            "title": "Themes",
-                            "path": "themes"
+                            "title": "Extending with CSS",
+                            "path": "theming-css"
                         },
                         {
                             "type": "item",
                             "title": "Customisation",
-                            "path": "global-style-customisation",
                             "children": [
+                                TODO refactor this
+                                {
+                                    "type": "item",
+                                    "title": "Colors & Dark Mode",
+                                    "path": "theming-colors"
+                                },
+                                {
+                                    "type": "item",
+                                    "title": "Borders",
+                                    "path": "theming-borders"
+                                },
                                 {
                                     "type": "item",
                                     "title": "Variable Reference",
@@ -166,40 +176,13 @@
                         },
                         {
                             "type": "item",
-                            "title": "Sass",
-                            "path": "global-style-customisation-sass"
+                            "title": "Distributing Shared Themes",
+                            "path": "theming-distribution"
                         },
                         {
                             "type": "item",
-                            "title": "Theming API",
-                            "path": "theming-api",
-                            "children": [
-                                {
-                                    "type": "item",
-                                    "title": "Extending with CSS",
-                                    "path": "theming-css"
-                                },
-                                {
-                                    "type": "item",
-                                    "title": "Colors & Dark Mode",
-                                    "path": "theming-colors"
-                                },
-                                {
-                                    "type": "item",
-                                    "title": "Borders",
-                                    "path": "theming-borders"
-                                },
-                                {
-                                    "type": "item",
-                                    "title": "Distributing Shared Themes",
-                                    "path": "theming-distribution"
-                                },
-                                {
-                                    "type": "item",
-                                    "title": "Migration",
-                                    "path": "theming-migration"
-                                }
-                            ]
+                            "title": "Migration from v32",
+                            "path": "theming-migration"
                         }
                     ]
                 },

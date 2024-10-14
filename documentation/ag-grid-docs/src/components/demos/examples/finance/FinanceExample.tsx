@@ -189,6 +189,7 @@ export const FinanceExample: React.FC<Props> = ({
             className={`${themeClass} ${styles.grid} ${gridHeight ? '' : styles.gridHeight}`}
         >
             <AgGridReact
+                theme="legacy"
                 ref={gridRef}
                 getRowId={getRowId}
                 rowData={rowData}

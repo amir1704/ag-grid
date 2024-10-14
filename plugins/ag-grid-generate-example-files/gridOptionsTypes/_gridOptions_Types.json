@@ -1360,7 +1360,7 @@
     "typesToInclude": []
   },
   "theme": {
-    "typeName": "GridTheme | string",
+    "typeName": "GridTheme | 'legacy'",
     "typesToInclude": [
       "GridTheme"
     ]
