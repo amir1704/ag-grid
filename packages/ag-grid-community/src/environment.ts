@@ -197,8 +197,8 @@ export class Environment extends BeanStub implements NamedBean {
             newThemeClass = themeGridOption;
         } else {
             newGridTheme = themeGridOption || themeQuartz;
-            if (!newGridTheme.getCssClass) {
-                _error(146, { theme: newGridTheme });
+            if (!newGridTheme?.getCssClass) {
+                _error(240, { theme: newGridTheme });
             }
             newThemeClass = newGridTheme.getCssClass();
         }
@@ -221,7 +221,7 @@ export class Environment extends BeanStub implements NamedBean {
             if (themeGridOption) {
                 _error(106);
             } else {
-                _error(145);
+                _error(239);
             }
         }
     }
