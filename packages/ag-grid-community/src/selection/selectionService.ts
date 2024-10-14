@@ -599,7 +599,7 @@ export class SelectionService extends BaseSelectionService implements NamedBean,
         }
 
         if (_isUsingNewRowSelectionAPI(this.gos) && !_isMultiRowSelection(this.gos)) {
-            _warn(132);
+            _warn(130);
             return;
         }
         this.validateSelectAllType();
