@@ -27,10 +27,6 @@ export function stripOutDarkModeCode(files: FileContents) {
             );
         }
     });
-    /* RTI-1751 Would break JS master detail example that provides a grid too,
-   if (files['index.html']) {        
-        files['index.html'] = files['index.html']?.replace(/(['"\s])ag-theme-quartz(['"\s])/g, "$1" + defaultTheme + "$2");
-    } */
 }
 
 /**

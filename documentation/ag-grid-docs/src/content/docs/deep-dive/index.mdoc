@@ -62,7 +62,7 @@ Complete our [Quick Start](./getting-started/) (or open the example below in Cod
 
 1) **Row Data:** The data to be displayed.
 1) **Column Definition:** Defines & controls grid columns.
-1) **Grid Component:** The `ag-grid-angular` component, with Dimensions, CSS Theme, Row Data, and Column Definition attributes
+1) **Grid Component:** The `ag-grid-angular` component, with Dimensions, Row Data, and Column Definition attributes
 
 {% gridExampleRunner title="Basic Example" name="basic-example"  exampleHeight=220 /%}
 
@@ -76,7 +76,7 @@ Complete our [Quick Start](./getting-started/) (or open the example below in Cod
 
 1) **Row Data:** The data to be displayed.
 1) **Column Definition:** Defines & controls grid columns.
-1) **Grid Component:** The `ag-grid-vue` component, with Dimensions, CSS Theme, Row Data, and Column Definition attributes
+1) **Grid Component:** The `ag-grid-vue` component, with Dimensions, Row Data, and Column Definition attributes
 
 {% gridExampleRunner title="Basic Example" name="basic-example"  exampleHeight=220 /%}
 
@@ -474,7 +474,6 @@ const App = {
    `
    <ag-grid-vue
      style="width: 100%; height: 100%"
-     class="ag-theme-quartz-dark"
      :columnDefs="colDefs"
      :rowData="rowData"
      :defaultColDef="defaultColDef"
@@ -582,7 +581,6 @@ const App = {
    `
    <ag-grid-vue
      style="width: 100%; height: 100%"
-     class="ag-theme-quartz-dark"
      :columnDefs="colDefs"
      :rowData="rowData"
      :defaultColDef="defaultColDef"
