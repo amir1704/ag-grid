@@ -673,10 +673,7 @@ export function getIntegratedDarkModeCode(exampleName: string, typescript?: bool
 }
 
 const darkModeTs = `
-        const isInitialModeDark = (): boolean => {
-            const attr: string | null = document.documentElement.getAttribute('data-default-theme');
-            return attr ? attr.endsWith('-dark') : false;
-        };
+        const isInitialModeDark = document.documentElement.dataset.agThemeMode?.includes("dark");
                   
         // update chart themes based on dark mode status
         const updateChartThemes = (isDark: boolean): void => {
@@ -693,7 +690,7 @@ const darkModeTs = `
         };
         
         // update chart themes when example first loads
-        updateChartThemes(isInitialModeDark());
+        updateChartThemes(isInitialModeDark);
                       
         interface ColorSchemeChangeEventDetail {
             darkMode: boolean;
@@ -710,12 +707,9 @@ const darkModeTs = `
     `;
 
 const darkModeJS = `
-    const isInitialModeDark = () => {
-            const attr = document.documentElement.getAttribute('data-default-theme');
-            return attr ? attr.endsWith('-dark') : false;
-        };
+        const isInitialModeDark = document.documentElement.dataset.agThemeMode?.includes("dark");
       
-        const updateChartThemes = (isDark) => {           
+        const updateChartThemes = (isDark) => { 
             const themes = ['ag-default', 'ag-material', 'ag-sheets', 'ag-polychroma', 'ag-vivid'];            
             const currentThemes = params.api.getGridOption('chartThemes');                    
             const customTheme = currentThemes && currentThemes.some(theme => theme.startsWith('my-custom-theme'));
@@ -729,7 +723,7 @@ const darkModeJS = `
         };
 
         // update chart themes when example first loads
-        updateChartThemes(isInitialModeDark());
+        updateChartThemes(isInitialModeDark);
 
         const handleColorSchemeChange = (event) => {
             const { darkMode } = event.detail;
