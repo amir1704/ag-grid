@@ -4,7 +4,7 @@ import { ClientSideRowModelModule } from 'ag-grid-community';
 import { ModuleRegistry } from 'ag-grid-community';
 import type { ColDef, GridOptions } from 'ag-grid-community';
 import { createGrid } from 'ag-grid-community';
-import { themeQuartz } from 'ag-grid-community';
+import { themeBalham } from 'ag-grid-community';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
@@ -28,8 +28,7 @@ const defaultColDef = {
 };
 
 const gridOptions: GridOptions<IOlympicData> = {
-    theme: themeQuartz,
-    loadThemeGoogleFonts: true,
+    theme: themeBalham,
     columnDefs,
     rowData,
     defaultColDef,

@@ -30,21 +30,17 @@ Before v33, themes were applied by importing our CSS files and setting a class o
 Themes are imported from `ag-grid-community` and provided to grid instances using the `theme` grid option.
 
 ```js
-import { themeQuartz } from 'ag-grid-community';
+import { themeBalham } from 'ag-grid-community';
 
 {% if isFramework("javascript") %}
 const gridOptions = {
-    theme: themeQuartz,
-    // Quartz uses the IBM Plex Sans font; load it from Google's CDN
-    loadThemeGoogleFonts: true,
+    theme: themeBalham,
     ...
 }
 {% /if %}
 {% if isFramework("react") %}
 <AgGridReact
-    theme={themeQuartz}
-    // Quartz uses the IBM Plex Sans font; load it from Google's CDN
-    loadThemeGoogleFonts
+    theme={themeBalham}
     ...
 />
 {% /if %}
@@ -52,16 +48,13 @@ const gridOptions = {
 // in template
 <ag-grid-vue
     :theme="theme"
-    // Quartz uses the IBM Plex Sans font; load it from Google's CDN
-    :loadThemeGoogleFonts="true"
     ...
 ></ag-grid-vue>
 
 // in component setup hook
 setup() {
     return {
-        theme: themeQuartz,
-        ...
+        theme: themeBalham,
     };
 }
 {% /if %}
@@ -69,12 +62,10 @@ setup() {
 // in template
 <ag-grid-angular
     [theme]="theme"
-    // Quartz uses the IBM Plex Sans font; load it from Google's CDN
-    loadThemeGoogleFonts
 />
 
 // in component class
-public theme = themeQuartz;
+public theme = themeBalham;
 {% /if %}
 ```
 
