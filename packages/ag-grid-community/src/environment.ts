@@ -85,13 +85,27 @@ export class Environment extends BeanStub implements NamedBean {
     }
 
     public applyThemeClass(el: HTMLElement) {
+        let themeClass: string | undefined;
+        if (this.gos.get('theme') === 'legacy') {
+            let node: HTMLElement | null = this.eGridDiv;
+            while (node) {
+                for (const className of Array.from(node.classList)) {
+                    if (className.startsWith('ag-theme-')) {
+                        themeClass = themeClass ? `${themeClass} ${className}` : className;
+                    }
+                }
+                node = node.parentElement;
+            }
+        } else {
+            themeClass = this.themeClass;
+        }
         for (const className of Array.from(el.classList)) {
             if (className.startsWith('ag-theme-')) {
                 el.classList.remove(className);
             }
         }
-        if (this.themeClass) {
-            el.classList.add(this.themeClass);
+        if (themeClass) {
+            el.classList.add(themeClass);
         }
     }
 
@@ -194,7 +208,6 @@ export class Environment extends BeanStub implements NamedBean {
         let newThemeClass: string | undefined;
         if (themeGridOption === 'legacy') {
             newGridTheme = undefined;
-            newThemeClass = themeGridOption;
         } else {
             newGridTheme = themeGridOption || themeQuartz;
             if (!newGridTheme?.getCssClass) {

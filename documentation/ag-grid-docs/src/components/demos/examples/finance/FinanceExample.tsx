@@ -201,6 +201,7 @@ export const FinanceExample: React.FC<Props> = ({
                 suppressAggFuncInHeader
                 groupDefaultExpanded={-1}
                 statusBar={statusBar}
+                popupParent={typeof document === 'object' ? document.body : undefined}
             />
         </div>
     );

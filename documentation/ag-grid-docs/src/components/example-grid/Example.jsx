@@ -637,7 +637,7 @@ const ExampleInner = ({ darkMode }) => {
             },
             rowDragManaged: true,
             rowDragMultiRow: true,
-            popupParent: IS_SSR ? null : document.querySelector('#example-wrapper'),
+            popupParent: IS_SSR ? null : document.body,
             rowGroupPanelShow: isSmall ? undefined : 'always',
             pivotPanelShow: 'always',
             suppressColumnMoveAnimation: suppressColumnMoveAnimation(),
