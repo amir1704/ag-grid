@@ -1,4 +1,4 @@
-import type { ImportType, Library } from '@ag-grid-types';
+import type { Library } from '@ag-grid-types';
 import { AgCharts } from 'ag-charts-enterprise';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -23,7 +23,6 @@ interface DataState {
     userLicenseIsTrial: boolean;
     userLicenseIsExpired: boolean;
     userLicenseTrialIsExpired: boolean;
-    importType: ImportType;
 }
 
 const licenseDataState = {
@@ -41,11 +40,6 @@ const licenseDataState = {
         getIsState: ({ userLicense, licensedProducts }: DataState) =>
             hasValue(userLicense) && licensedProducts.charts && licensedProducts.grid,
         message: `Valid Enterprise Bundle license key. Includes AG Grid Enterprise and AG Charts Enterprise`,
-    },
-    minimalModulesInfo: {
-        getIsState: ({ licensedProducts, importType }: DataState) => licensedProducts.grid && importType === 'modules',
-        message:
-            "This is the minimal set of modules needed to render AG Grid Enterprise. You may need to include additional modules to this list of dependencies according to the AG Grid Enterprise feature you're using",
     },
 
     // On Grid website, error if only have AG Charts Enterprise
@@ -101,7 +95,6 @@ const useLicenseState = ({
     userLicenseIsTrial,
     userLicenseIsExpired,
     userLicenseTrialIsExpired,
-    importType,
 }: DataState) => {
     const [licenseState, setLicenseState] = useState<LicenseState>({} as LicenseState);
 
@@ -120,7 +113,6 @@ const useLicenseState = ({
                 userLicenseIsTrial,
                 userLicenseIsExpired,
                 userLicenseTrialIsExpired,
-                importType,
             });
 
             if (isError) {
@@ -146,7 +138,6 @@ const useLicenseState = ({
         userLicenseIsTrial,
         userLicenseIsExpired,
         userLicenseTrialIsExpired,
-        importType,
     ]);
 
     return {
@@ -160,27 +151,16 @@ export const useLicenseData = ({ library }: { library: Library }) => {
      */
     const [userLicense, setUserLicense] = useState<string>('');
     const [isIntegratedCharts, setIsIntegratedCharts] = useState<boolean>(false);
-    const [importType, setImportType] = useState<ImportType>('packages');
 
     const updateIsIntegratedChartsWithUrlUpdate = useCallback(
         (isIntegrated: boolean) => {
             setIsIntegratedCharts(isIntegrated);
 
             if (library === 'grid') {
-                updateSearchParams({ integratedCharts: isIntegrated, importType });
+                updateSearchParams({ integratedCharts: isIntegrated });
             }
         },
-        [importType, library]
-    );
-    const updateImportTypeWithUrlUpdate = useCallback(
-        (type: ImportType) => {
-            setImportType(type);
-
-            if (library === 'grid') {
-                updateSearchParams({ integratedCharts: isIntegratedCharts, importType: type });
-            }
-        },
-        [isIntegratedCharts, library]
+        [library]
     );
 
     /**
@@ -233,10 +213,9 @@ export const useLicenseData = ({ library }: { library: Library }) => {
         userLicenseIsTrial,
         userLicenseIsExpired,
         userLicenseTrialIsExpired,
-        importType,
     });
 
-    useUpdateDataFromUrl({ library, setIsIntegratedCharts, setImportType });
+    useUpdateDataFromUrl({ library, setIsIntegratedCharts });
     useLicenseDebug({
         licenseDetails,
         chartsLicenseDetails,
@@ -281,8 +260,6 @@ export const useLicenseData = ({ library }: { library: Library }) => {
     return {
         userLicense,
         setUserLicense,
-        importType,
-        updateImportTypeWithUrlUpdate,
         licensedProducts,
         isIntegratedCharts,
         updateIsIntegratedChartsWithUrlUpdate,
